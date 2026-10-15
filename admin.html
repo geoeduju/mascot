@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>교사 전용 관리자 시스템 - 광주시 마스코트 만들기</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --admin-primary: #1e293b;
+            --admin-accent: #d97706;
+            --danger-color: #ef4444;
+            --bg-color: #f1f5f9;
+            --card-bg: #ffffff;
+            --text-dark: #0f172a;
+            --text-muted: #64748b;
+            --border-color: #cbd5e1;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--admin-primary);
+            color: white;
+            padding: 18px 36px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-title h2 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .header-title span.badge {
+            background-color: var(--admin-accent);
+            color: white;
+            font-size: 0.75rem;
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        .btn-refresh {
+            background-color: #334155;
+            color: white;
+            border: 1px solid #475569;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 0.88rem;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-refresh:hover { background-color: #475569; }
+
+        main {
+            max-width: 1280px;
+            width: 100%;
+            margin: 24px auto;
+            padding: 0 20px;
+            flex: 1;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .stat-card .info h4 {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+
+        .stat-card .info p {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--admin-primary);
+        }
+
+        .stat-card .icon {
+            font-size: 2rem;
+            color: #94a3b8;
+        }
+
+        .filter-bar {
+            background: white;
+            padding: 16px 20px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            margin-bottom: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .filter-group label { font-size: 0.88rem; font-weight: 600; }
+
+        .filter-select {
+            padding: 8px 32px 8px 14px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 0.88rem;
+            outline: none;
+            background-color: white;
+            cursor: pointer;
+        }
+
+        .board-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 20px;
+        }
+
+        .board-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card-header-admin {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 1px dashed var(--border-color);
+        }
+
+        .card-author-admin {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--admin-primary);
+        }
+
+        .btn-delete-admin {
+            background-color: #fee2e2;
+            color: var(--danger-color);
+            border: 1px solid #fca5a5;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .btn-delete-admin:hover {
+            background-color: var(--danger-color);
+            color: white;
+        }
+
+        .card-mascot-img-admin {
+            width: 100%;
+            height: 200px;
+            object-fit: contain;
+            background-color: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            margin-bottom: 12px;
+        }
+
+        .card-desc {
+            font-size: 0.88rem;
+            color: #475569;
+            line-height: 1.5;
+            margin-bottom: 16px;
+            flex: 1;
+            white-space: pre-line;
+        }
+
+        .card-footer-admin {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            padding-top: 10px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .toast-msg {
+            display: none;
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #0f172a;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            z-index: 3000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+    </style>
+</head>
+<body>
+
+    <div id="toast" class="toast-msg">메시지</div>
+
+    <!-- 헤더 -->
+    <header>
+        <div class="header-title">
+            <h2><i class="fa-solid fa-user-shield"></i> 교사 전용 관리자 대시보드 <span class="badge">광주시 마스코트 프로젝트</span></h2>
+        </div>
+        <button class="btn-refresh" onclick="loadAdminData()"><i class="fa-solid fa-rotate"></i> 실시간 데이터 새로고침</button>
+    </header>
+
+    <main>
+        <!-- 요약 통계 -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="info">
+                    <h4>총 제출된 마스코트</h4>
+                    <p id="stat-total-count">0건</p>
+                </div>
+                <div class="icon"><i class="fa-solid fa-palette"></i></div>
+            </div>
+            <div class="stat-card">
+                <div class="info">
+                    <h4>누적 총 투표 수</h4>
+                    <p id="stat-total-votes">0표</p>
+                </div>
+                <div class="icon"><i class="fa-solid fa-thumbs-up"></i></div>
+            </div>
+            <div class="stat-card">
+                <div class="info">
+                    <h4>참여 학급 수</h4>
+                    <p id="stat-class-count">0개 반</p>
+                </div>
+                <div class="icon"><i class="fa-solid fa-school"></i></div>
+            </div>
+        </div>
+
+        <!-- 필터 컨트롤 -->
+        <div class="filter-bar">
+            <div class="filter-group">
+                <label for="filter-class"><i class="fa-solid fa-filter"></i> 학급 검색:</label>
+                <select id="filter-class" class="filter-select" onchange="renderAdminGrid()">
+                    <option value="all">전체 학급 보기</option>
+                    <option value="1">1반</option><option value="2">2반</option><option value="3">3반</option><option value="4">4반</option><option value="5">5반</option><option value="6">6반</option><option value="7">7반</option><option value="8">8반</option>
+                </select>
+
+                <label for="filter-sort" style="margin-left: 10px;"><i class="fa-solid fa-arrow-down-wide-short"></i> 정렬 기준:</label>
+                <select id="filter-sort" class="filter-select" onchange="renderAdminGrid()">
+                    <option value="newest">최신 제출순</option>
+                    <option value="votes">득표 많은순</option>
+                </select>
+            </div>
+            <span style="font-size:0.85rem; color:var(--text-muted);">부적절한 게시물은 우측 [삭제] 버튼으로 즉시 삭제할 수 있습니다.</span>
+        </div>
+
+        <!-- 제출 목록 -->
+        <div class="board-grid" id="admin-board-grid">
+            <div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: var(--text-muted);">데이터를 불러오는 중입니다...</div>
+        </div>
+    </main>
+
+    <script>
+        const GAS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbww2rAQook33qarQ44ycraWV3ZGRChN7oVh1EnrElTeZJYNrTr5FcQjJjQ8u4RU7piC/exec";
+
+        let allAdminData = [];
+
+        window.onload = function() { loadAdminData(); };
+
+        async function loadAdminData() {
+            if (!GAS_WEB_APP_URL) return;
+
+            showToast("구글 시트에서 최신 데이터를 가져오는 중...");
+            try {
+                const response = await fetch(GAS_WEB_APP_URL + "?action=read");
+                const data = await response.json();
+                if (Array.isArray(data)) {
+                    allAdminData = data;
+                    updateStats();
+                    renderAdminGrid();
+                    showToast("데이터 업데이트 완료!");
+                }
+            } catch (err) {
+                console.error("데이터 로드 실패:", err);
+                showToast("데이터를 불러오는 중 오류가 발생했습니다.");
+            }
+        }
+
+        function updateStats() {
+            document.getElementById('stat-total-count').textContent = `${allAdminData.length}건`;
+            const totalVotes = allAdminData.reduce((acc, cur) => acc + (Number(cur.votes) || 0), 0);
+            document.getElementById('stat-total-votes').textContent = `${totalVotes}표`;
+            const uniqueClasses = new Set(allAdminData.map(item => item.classNum)).size;
+            document.getElementById('stat-class-count').textContent = `${uniqueClasses}개 반`;
+        }
+
+        function renderAdminGrid() {
+            const grid = document.getElementById('admin-board-grid');
+            const classFilter = document.getElementById('filter-class').value;
+            const sortFilter = document.getElementById('filter-sort').value;
+
+            let list = [...allAdminData];
+
+            if (classFilter !== 'all') list = list.filter(item => String(item.classNum) === String(classFilter));
+            if (sortFilter === 'votes') list.sort((a, b) => (Number(b.votes) || 0) - (Number(a.votes) || 0));
+            else list.sort((a, b) => (Number(b.timestamp) || 0) - (Number(a.timestamp) || 0));
+
+            if (list.length === 0) {
+                grid.innerHTML = `<div style="grid-column: 1 / -1; text-align: center; padding: 50px; color: var(--text-muted);">제출된 마스코트 데이터가 없습니다.</div>`;
+                return;
+            }
+
+            let html = '';
+            list.forEach(sub => {
+                html += `
+                    <div class="board-card">
+                        <div>
+                            <div class="card-header-admin">
+                                <span class="card-author-admin"><i class="fa-solid fa-user"></i> ${sub.author}</span>
+                                <button class="btn-delete-admin" onclick="deleteMascotFromAdmin('${sub.id}')"><i class="fa-solid fa-trash"></i> 삭제</button>
+                            </div>
+                            <img src="${sub.imageData}" alt="제출 마스코트" class="card-mascot-img-admin">
+                            <div class="card-desc">${sub.desc}</div>
+                        </div>
+                        <div class="card-footer-admin">
+                            <span>받은 투표: <strong style="color:var(--admin-accent); font-size:1rem;">${sub.votes || 0}</strong>표</span>
+                        </div>
+                    </div>
+                `;
+            });
+
+            grid.innerHTML = html;
+        }
+
+        async function deleteMascotFromAdmin(id) {
+            if (confirm("정말로 이 마스코트를 구글 시트에서 삭제하시겠습니까?")) {
+                showToast("구글 시트에서 삭제하는 중...");
+                try {
+                    await fetch(GAS_WEB_APP_URL, {
+                        method: "POST",
+                        body: JSON.stringify({ action: "delete", id: id })
+                    });
+                    await loadAdminData();
+                    showToast("성공적으로 삭제되었습니다.");
+                } catch (err) {
+                    console.error("삭제 실패:", err);
+                    showToast("삭제 중 오류가 발생했습니다.");
+                }
+            }
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.style.display = 'block';
+            setTimeout(() => { toast.style.display = 'none'; }, 2500);
+        }
+    </script>
+</body>
+</html>
