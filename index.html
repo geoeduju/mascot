@@ -302,6 +302,7 @@
             font-weight: 700;
             color: var(--primary-color);
             margin-bottom: 8px;
+            line-height: 1.35;
         }
 
         .gwangju-symbol-item p {
@@ -915,18 +916,18 @@
             </div>
             
             <div class="ref-grid">
-                <!-- 경기도 광주의 공식 상징물 -->
+                <!-- 경기도 광주의 공식 상징물 (제목 깔끔한 줄바꿈 적용) -->
                 <div class="ref-card">
                     <h4><i class="fa-solid fa-landmark" style="color:var(--primary-color);"></i> 경기도 광주의 공식 상징물</h4>
                     <div class="gwangju-symbol-grid">
                         <div class="gwangju-symbol-item">
                             <img src="images/mascot_gwangju.png" alt="광주시 마스코트 그리니 크리니" class="gwangju-symbol-img" onerror="this.src='https://via.placeholder.com/200x140?text=그리니+크리니'">
-                            <h5>공식 마스코트 (그리니 & 크리니)</h5>
+                            <h5>공식 마스코트<br>(그리니 & 크리니)</h5>
                             <p>• <strong>그리니 (숲의 요정):</strong> 초록빛 숲과 깨끗한 공기를 만드는 친근한 요정 캐릭터입니다.<br>• <strong>크리니 (물의 요정):</strong> 팔당호와 경안천의 맑은 물을 보호하는 요정 캐릭터입니다.</p>
                         </div>
                         <div class="gwangju-symbol-item">
                             <img src="images/gwangju_ci.png" alt="광주시 도시 심볼" class="gwangju-symbol-img" onerror="this.src='https://via.placeholder.com/200x140?text=도시+심볼'">
-                            <h5>도시 심볼 (CI)</h5>
+                            <h5>도시 심볼<br>(CI)</h5>
                             <p>• <strong>붉은색:</strong> 남한산성 성곽과 미래를 향한 열정<br>• <strong>노란색&파란색:</strong> 펼친 팔 형상, 도심 발전 및 청렴한 시정<br>• <strong>초록색:</strong> 도약하는 다리와 풍요로운 대지</p>
                         </div>
                     </div>
@@ -1098,9 +1099,10 @@
                                 </label>
                             </div>
 
+                            <!-- 기본 펜 굵기를 3으로 변경 -->
                             <div class="brush-control">
                                 <span>굵기:</span>
-                                <input type="range" id="brush-size" min="2" max="28" value="5" onchange="updateBrushSize(this.value)">
+                                <input type="range" id="brush-size" min="1" max="28" value="3" onchange="updateBrushSize(this.value)">
                             </div>
 
                             <div>
@@ -1169,7 +1171,7 @@
         let canvas, ctx;
         let isDrawing = false;
         let currentPenColor = "#000000";
-        let currentPenSize = 5;
+        let currentPenSize = 3; // 초기 펜 굵기를 3으로 설정
         let isEraser = false;
 
         const resourceDict = {
