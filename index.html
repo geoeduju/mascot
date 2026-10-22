@@ -715,15 +715,25 @@
             color: var(--text-dark);
         }
 
+        /* 화살표 위치 간격 조정을 위한 드롭다운 CSS 정밀 커스텀 */
         .filter-select {
-            padding: 12px 40px 12px 18px;
+            padding: 12px 38px 12px 16px;
             border: 1.5px solid var(--border-color);
             border-radius: 10px;
             font-size: 1rem;
             outline: none;
-            background-color: white;
             cursor: pointer;
             font-weight: 600;
+            color: var(--text-dark);
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="%2364748b" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>') no-repeat right 16px center #ffffff;
+            transition: border-color 0.2s;
+        }
+
+        .filter-select:focus {
+            border-color: var(--primary-color);
         }
 
         .board-grid {
@@ -945,7 +955,7 @@
     <header>
         <div class="header-title">
             <h2>우리 지역 마스코트 만들기</h2>
-            <p>경기도 광주시 캐릭터 마스코트 디자인 프로젝트</p>
+            <p>Ⅺ-2. 우리나라 여러 지역의 경쟁력</p>
         </div>
         <div class="user-badge">
             <span id="display-user-info">학생 정보 미입력</span>
@@ -966,13 +976,13 @@
         <!-- 탭 1: 자료 탐구하기 -->
         <section id="tab-reference" class="tab-content active">
             <div class="section-header">
-                <h3>경기도 광주시 마스코트 및 지역 정보</h3>
+                <h3>경기도 광주시 공식 상징물 및 지역 정보</h3>
             </div>
             
             <div class="ref-grid">
-                <!-- 경기도 광주의 공식 상징물 -->
+                <!-- 경기도 광주시의 공식 상징물 -->
                 <div class="ref-card">
-                    <h4><i class="fa-solid fa-landmark" style="color:var(--primary-color);"></i> 경기도 광주의 공식 상징물</h4>
+                    <h4><i class="fa-solid fa-landmark" style="color:var(--primary-color);"></i> 경기도 광주시의 공식 상징물</h4>
                     <div class="gwangju-symbol-grid">
                         <div class="gwangju-symbol-item">
                             <img src="images/mascot_gwangju.png" alt="광주시 마스코트 그리니 크리니" class="gwangju-symbol-img" onerror="this.src='https://via.placeholder.com/200x140?text=그리니+크리니'">
@@ -987,9 +997,10 @@
                     </div>
                 </div>
 
+                <!-- 경기도 광주시의 지역 정보 -->
                 <div class="ref-card">
-                    <h4><i class="fa-solid fa-map-location-dot" style="color:var(--accent-color);"></i> 경기도 광주의 지역 자원</h4>
-                    <div class="resource-category-title"><i class="fa-solid fa-monument"></i> 역사·문화 자원</div>
+                    <h4><i class="fa-solid fa-map-location-dot" style="color:var(--accent-color);"></i> 경기도 광주시의 지역 정보</h4>
+                    <div class="resource-category-title"><i class="fa-solid fa-monument"></i> 역사·문화</div>
                     <div class="resource-tags-group">
                         <button class="clickable-tag" onclick="showResourceDetail('남한산성')">🏯 남한산성 (세계유산)</button>
                         <button class="clickable-tag" onclick="showResourceDetail('분원도자요지')">🏺 분원 도자 요지</button>
@@ -997,7 +1008,7 @@
                         <button class="clickable-tag" onclick="showResourceDetail('광주향교')">🏛️ 광주향교</button>
                         <button class="clickable-tag" onclick="showResourceDetail('신익희생가')">🇰🇷 해공 신익희 생가</button>
                     </div>
-                    <div class="resource-category-title"><i class="fa-solid fa-tree"></i> 생태·자연 자원</div>
+                    <div class="resource-category-title"><i class="fa-solid fa-tree"></i> 생태·자연</div>
                     <div class="resource-tags-group">
                         <button class="clickable-tag" onclick="showResourceDetail('팔당호')">💧 팔당호 청정수역</button>
                         <button class="clickable-tag" onclick="showResourceDetail('경안천')">🌿 경안천 생태습지</button>
@@ -1183,7 +1194,6 @@
                 <span style="font-size:0.92rem; color:var(--text-muted);">작품을 터치하면 크게 볼 수 있어요! 마음에 드는 작품에 투표해 보세요 👍</span>
             </div>
 
-            <!-- 새로고침 버튼이 탑재된 필터 바 -->
             <div class="filter-control-bar">
                 <div class="filter-group">
                     <label for="filter-class"><i class="fa-solid fa-filter"></i> 학급 선택:</label>
@@ -1587,7 +1597,7 @@
                         <span class="card-badge-example">[교사 예시 자료]</span>
                         <div class="card-author"><i class="fa-solid fa-chalkboard-user"></i> 선생님 예시 마스코트</div>
                         <img src="images/mascot_gwangju.png" alt="선생님 예시 그림" class="card-mascot-img" onerror="this.src='https://via.placeholder.com/300x200?text=선생님+예시+마스코트'">
-                        <div class="card-desc">광주시의 공식 마스코트 '그리니'와 '크리니' 예시입니다. (터치시 크게보기)</div>
+                        <div class="card-desc">광주시의 공식 마스코트 '그리니'와 '크리니' 예시입니다.</div>
                     </div>
                     <div class="card-footer">
                         <span style="font-size:0.75rem; color:#854d0e;">🔍 터치시 크게보기</span>
