@@ -17,7 +17,7 @@
             --card-bg: #ffffff;
             --text-dark: #1e293b;
             --text-muted: #64748b;
-            --border-color: #e2e8f0;
+            --border-color: #cbd5e1;
         }
 
         * {
@@ -35,6 +35,8 @@
             display: flex;
             flex-direction: column;
             line-height: 1.6;
+            -webkit-user-select: none;
+            user-select: none;
         }
 
         /* 학생 로그인 모달 */
@@ -44,66 +46,66 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(15, 23, 42, 0.6);
+            background-color: rgba(15, 23, 42, 0.65);
             display: flex;
             justify-content: center;
             align-items: center;
             z-index: 1000;
-            backdrop-filter: blur(4px);
+            backdrop-filter: blur(5px);
         }
 
         .login-card {
             background: var(--card-bg);
-            padding: 36px 32px;
-            border-radius: 12px;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            padding: 40px 36px;
+            border-radius: 16px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15);
             width: 90%;
-            max-width: 480px;
+            max-width: 520px;
             border: 1px solid var(--border-color);
         }
 
         .login-card h1 {
             color: var(--primary-color);
-            font-size: clamp(1.1rem, 4vw, 1.35rem);
+            font-size: clamp(1.2rem, 3.5vw, 1.45rem);
             font-weight: 700;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
             text-align: center;
             white-space: nowrap;
         }
 
         .login-card p.subtitle {
             color: var(--text-muted);
-            font-size: 0.95rem;
+            font-size: 1rem;
             font-weight: 300;
-            margin-bottom: 24px;
+            margin-bottom: 28px;
             text-align: center;
         }
 
         .form-row {
             display: flex;
-            gap: 12px;
-            margin-bottom: 16px;
+            gap: 16px;
+            margin-bottom: 18px;
         }
 
         .form-group {
-            margin-bottom: 16px;
+            margin-bottom: 18px;
             flex: 1;
         }
 
         .form-group label {
             display: block;
             font-weight: 600;
-            font-size: 0.92rem;
-            margin-bottom: 6px;
+            font-size: 0.95rem;
+            margin-bottom: 8px;
             color: var(--text-dark);
         }
 
         .form-group input {
             width: 100%;
-            padding: 12px 14px;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            font-size: 1rem;
+            padding: 14px 16px;
+            border: 1.5px solid var(--border-color);
+            border-radius: 10px;
+            font-size: 1.05rem;
             outline: none;
             transition: border-color 0.2s;
         }
@@ -114,13 +116,13 @@
 
         .btn-primary {
             width: 100%;
-            padding: 14px;
+            padding: 16px;
             background-color: var(--primary-color);
             color: white;
             border: none;
-            border-radius: 8px;
-            font-size: 1.05rem;
-            font-weight: 600;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 700;
             cursor: pointer;
             transition: background 0.2s;
         }
@@ -133,20 +135,20 @@
         header {
             background-color: #ffffff;
             border-bottom: 1px solid var(--border-color);
-            padding: 16px 32px;
+            padding: 18px 36px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
         .header-title h2 {
-            font-size: 1.35rem;
+            font-size: 1.45rem;
             font-weight: 700;
             color: var(--primary-color);
         }
 
         .header-title p {
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             color: var(--text-muted);
             font-weight: 300;
         }
@@ -154,13 +156,13 @@
         .user-badge {
             background-color: var(--primary-light);
             color: var(--primary-color);
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.95rem;
-            font-weight: 600;
+            padding: 10px 20px;
+            border-radius: 24px;
+            font-size: 1rem;
+            font-weight: 700;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 14px;
             border: 1px solid #cce7d4;
         }
 
@@ -168,41 +170,41 @@
             background: transparent;
             color: var(--text-muted);
             border: none;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             cursor: pointer;
             text-decoration: underline;
         }
 
-        /* 네비게이션 바 */
+        /* 네비게이션 바 (가로모드 터치에 최적화) */
         nav {
             background: white;
             border-bottom: 1px solid var(--border-color);
-            padding: 12px 24px;
+            padding: 12px 36px;
         }
 
         .nav-container {
-            max-width: 1280px;
+            max-width: 1360px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
-            gap: 16px;
+            gap: 20px;
         }
 
         .nav-tab {
             flex: 1;
-            padding: 14px 18px;
-            border: 1px solid var(--border-color);
+            padding: 16px 20px;
+            border: 1.5px solid var(--border-color);
             background: var(--bg-color);
-            font-size: 1.05rem;
-            font-weight: 600;
+            font-size: 1.1rem;
+            font-weight: 700;
             color: var(--text-muted);
             cursor: pointer;
-            border-radius: 10px;
+            border-radius: 12px;
             transition: all 0.2s;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 12px;
         }
 
         .nav-tab:hover {
@@ -215,16 +217,16 @@
             background-color: var(--primary-color);
             color: white;
             border-color: var(--primary-color);
-            box-shadow: 0 4px 6px -1px rgba(43, 122, 75, 0.2);
+            box-shadow: 0 4px 8px -1px rgba(43, 122, 75, 0.25);
         }
 
-        /* 메인 컨텐츠 */
+        /* 메인 컨텐츠 (태블릿 가로화면 대응 확장 폭) */
         main {
             flex: 1;
-            max-width: 1280px;
+            max-width: 1360px;
             width: 100%;
-            margin: 20px auto;
-            padding: 0 24px;
+            margin: 24px auto;
+            padding: 0 36px;
         }
 
         .tab-content {
@@ -236,13 +238,13 @@
         }
 
         .section-header {
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid var(--primary-color);
+            margin-bottom: 22px;
+            padding-bottom: 12px;
+            border-bottom: 2.5px solid var(--primary-color);
         }
 
         .section-header h3 {
-            font-size: 1.35rem;
+            font-size: 1.4rem;
             font-weight: 700;
             color: var(--primary-color);
         }
@@ -250,55 +252,55 @@
         .ref-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 24px;
-            margin-bottom: 28px;
+            gap: 28px;
+            margin-bottom: 32px;
         }
 
         .ref-card {
             background: white;
-            border-radius: 12px;
-            padding: 24px;
+            border-radius: 14px;
+            padding: 26px;
             border: 1px solid var(--border-color);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
         }
 
         .ref-card h4 {
-            font-size: 1.15rem;
+            font-size: 1.2rem;
             font-weight: 700;
             color: var(--text-dark);
-            margin-bottom: 18px;
+            margin-bottom: 20px;
             display: flex;
             align-items: center;
             gap: 10px;
         }
 
-        /* 광주시 공식 상징물 */
+        /* 광주시 공식 상징물 카드 */
         .gwangju-symbol-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 16px;
+            gap: 18px;
         }
 
         .gwangju-symbol-item {
             background: var(--bg-color);
             border: 1px solid var(--border-color);
-            border-radius: 10px;
-            padding: 16px;
+            border-radius: 12px;
+            padding: 18px;
             text-align: center;
         }
 
         .gwangju-symbol-img {
             width: 100%;
-            height: 140px;
+            height: 150px;
             object-fit: contain;
             background-color: white;
-            border-radius: 8px;
+            border-radius: 10px;
             border: 1px solid var(--border-color);
-            margin-bottom: 12px;
+            margin-bottom: 14px;
         }
 
         .gwangju-symbol-item h5 {
-            font-size: 1rem;
+            font-size: 1.05rem;
             font-weight: 700;
             color: var(--primary-color);
             margin-bottom: 8px;
@@ -306,17 +308,17 @@
         }
 
         .gwangju-symbol-item p {
-            font-size: 0.88rem;
+            font-size: 0.9rem;
             color: #475569;
-            line-height: 1.45;
+            line-height: 1.5;
             text-align: left;
         }
 
         .resource-category-title {
-            font-size: 0.95rem;
+            font-size: 0.98rem;
             font-weight: 700;
             color: var(--primary-color);
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             display: flex;
             align-items: center;
             gap: 8px;
@@ -325,17 +327,17 @@
         .resource-tags-group {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 20px;
+            gap: 12px;
+            margin-bottom: 22px;
         }
 
         .clickable-tag {
             background-color: #f1f5f9;
             border: 1.5px solid #cbd5e1;
             color: var(--text-dark);
-            padding: 10px 16px;
-            border-radius: 8px;
-            font-size: 0.95rem;
+            padding: 12px 18px;
+            border-radius: 10px;
+            font-size: 0.98rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.2s;
@@ -354,18 +356,18 @@
         /* 지식백과 검색 영역 */
         .search-section-box {
             background: white;
-            padding: 26px;
-            border-radius: 12px;
+            padding: 28px;
+            border-radius: 14px;
             border: 1px solid var(--border-color);
-            margin-bottom: 32px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+            margin-bottom: 36px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.03);
         }
 
         .search-section-box h4 {
-            font-size: 1.2rem;
+            font-size: 1.25rem;
             font-weight: 700;
             color: var(--primary-color);
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             display: flex;
             align-items: center;
             gap: 10px;
@@ -373,15 +375,15 @@
 
         .search-bar {
             display: flex;
-            gap: 12px;
+            gap: 14px;
         }
 
         .search-bar input {
             flex: 1;
-            padding: 14px 20px;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            font-size: 1.05rem;
+            padding: 16px 22px;
+            border: 1.5px solid var(--border-color);
+            border-radius: 10px;
+            font-size: 1.08rem;
             outline: none;
         }
 
@@ -390,29 +392,29 @@
         }
 
         .search-bar button {
-            padding: 14px 28px;
+            padding: 16px 32px;
             background-color: var(--primary-color);
             color: white;
             border: none;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 1.05rem;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 1.08rem;
             cursor: pointer;
         }
 
         .portal-direct-link-banner {
-            margin-top: 16px;
+            margin-top: 18px;
             background-color: var(--primary-light);
             border: 1px solid #cce7d4;
-            padding: 14px 22px;
-            border-radius: 8px;
+            padding: 16px 24px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: space-between;
         }
 
         .portal-direct-link-banner span {
-            font-size: 0.98rem;
+            font-size: 1.02rem;
             color: var(--primary-color);
             font-weight: 700;
         }
@@ -421,142 +423,161 @@
             background-color: #03cf5d;
             color: white;
             text-decoration: none;
-            padding: 10px 18px;
-            border-radius: 8px;
-            font-size: 0.95rem;
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-size: 0.98rem;
             font-weight: 700;
             display: inline-flex;
             align-items: center;
             gap: 8px;
         }
 
-        /* 다른 지자체 마스코트 예시 카드 그리드 */
+        /* 다른 지자체 마스코트 카드 그리드 */
         .other-cities-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+            gap: 22px;
         }
 
         .city-card {
             background: white;
             border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 20px;
+            border-radius: 14px;
+            padding: 22px;
             text-align: center;
             transition: border-color 0.2s, transform 0.2s;
         }
 
         .city-card:hover {
             border-color: var(--primary-color);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.06);
         }
 
         .city-img {
             width: 100%;
-            height: 160px;
+            height: 165px;
             object-fit: contain;
-            border-radius: 8px;
-            margin-bottom: 12px;
+            border-radius: 10px;
+            margin-bottom: 14px;
             background-color: #f8fafc;
             border: 1px solid #e2e8f0;
         }
 
         .city-name {
-            font-size: 0.88rem;
+            font-size: 0.92rem;
             font-weight: 700;
             color: var(--primary-color);
             margin-bottom: 4px;
         }
 
         .city-mascot-title {
-            font-size: 1.15rem;
+            font-size: 1.2rem;
             font-weight: 700;
             color: var(--text-dark);
-            margin-bottom: 6px;
+            margin-bottom: 8px;
         }
 
         .city-meaning {
-            font-size: 0.88rem;
+            font-size: 0.9rem;
             color: var(--text-muted);
-            line-height: 1.4;
+            line-height: 1.45;
             text-align: left;
         }
 
-        /* 탭 2: 마스코트 제출 (그림판 영역) */
+        /* 탭 2: 마스코트 제출 (태블릿 가로형 그림판 박스) */
         .submit-box {
             background: white;
-            padding: 32px;
-            border-radius: 12px;
+            padding: 36px 40px;
+            border-radius: 16px;
             border: 1px solid var(--border-color);
-            max-width: 820px;
+            max-width: 1080px;
             margin: 0 auto;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
         }
 
         .submit-box h3 {
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             font-weight: 700;
             color: var(--primary-color);
-            margin-bottom: 20px;
+            margin-bottom: 24px;
             text-align: center;
         }
 
         .form-label {
             display: block;
             font-weight: 700;
-            font-size: 1.05rem;
-            margin-bottom: 10px;
+            font-size: 1.1rem;
+            margin-bottom: 12px;
             color: var(--text-dark);
         }
 
         .canvas-container {
             border: 2px solid var(--border-color);
-            border-radius: 10px;
+            border-radius: 14px;
             overflow: hidden;
             background: #ffffff;
-            margin-bottom: 24px;
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+            margin-bottom: 28px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
         }
 
+        /* 그림판 상단 툴바 UI 정돈 */
         .canvas-toolbar {
-            background: #f1f5f9;
-            padding: 12px 16px;
+            background: #f8fafc;
+            padding: 14px 20px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             flex-wrap: wrap;
-            gap: 12px;
-            border-bottom: 1px solid var(--border-color);
+            gap: 16px;
+            border-bottom: 1.5px solid var(--border-color);
         }
 
-        /* 색상 팔레트 스타일 */
+        /* 깔끔하게 개선된 색상 팔레트 디자인 */
+        .color-palette-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #ffffff;
+            padding: 6px 14px;
+            border-radius: 30px;
+            border: 1px solid var(--border-color);
+        }
+
         .color-palette {
             display: flex;
             align-items: center;
-            flex-wrap: wrap;
             gap: 8px;
+            flex-wrap: wrap;
         }
 
+        /* 터치하기 편한 32px 원형 색상 버튼 */
         .color-btn {
-            width: 26px;
-            height: 26px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
             border: 2px solid #cbd5e1;
             cursor: pointer;
-            transition: transform 0.15s;
+            transition: transform 0.15s, box-shadow 0.15s;
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.2);
         }
 
-        .color-btn:hover, .color-btn.active {
-            transform: scale(1.25);
-            border-color: var(--text-dark);
+        .color-btn:hover {
+            transform: scale(1.18);
+        }
+
+        .color-btn.active {
+            transform: scale(1.2);
+            border-color: #ffffff;
+            box-shadow: 0 0 0 3px var(--primary-color), 0 2px 6px rgba(0,0,0,0.2);
             z-index: 2;
         }
 
-        /* 원형 무지개 스포이트 버튼 */
+        /* 세련된 무지개 원형 스포이트 버튼 */
         .custom-color-btn {
             position: relative;
-            width: 26px;
-            height: 26px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
             background: conic-gradient(from 0deg, #ff0000, #ffff00, #00ff00, #00ffff, #0000ff, #ff00ff, #ff0000);
             border: 2px solid #cbd5e1;
@@ -564,19 +585,17 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            transition: transform 0.15s, border-color 0.15s;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            transition: transform 0.15s, box-shadow 0.15s;
         }
 
         .custom-color-btn:hover {
-            transform: scale(1.25);
-            border-color: var(--text-dark);
+            transform: scale(1.18);
         }
 
         .custom-color-btn i {
-            font-size: 0.68rem;
+            font-size: 0.8rem;
             color: white;
-            filter: drop-shadow(0 1px 1px rgba(0,0,0,0.8));
+            filter: drop-shadow(0 1px 2px rgba(0,0,0,0.8));
             pointer-events: none;
         }
 
@@ -593,27 +612,46 @@
         .brush-control {
             display: flex;
             align-items: center;
-            gap: 8px;
-            font-size: 0.88rem;
-            font-weight: 600;
+            gap: 10px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            background: white;
+            padding: 6px 16px;
+            border-radius: 30px;
+            border: 1px solid var(--border-color);
+        }
+
+        .brush-control input[type="range"] {
+            width: 110px;
+            accent-color: var(--primary-color);
+            cursor: pointer;
+        }
+
+        .toolbar-right-tools {
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .btn-tool {
-            padding: 6px 14px;
+            padding: 8px 16px;
             background: white;
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            font-size: 0.88rem;
-            font-weight: 600;
+            border: 1.5px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 700;
             cursor: pointer;
             display: inline-flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
+            transition: all 0.15s;
         }
 
         .btn-tool:hover {
             background-color: var(--primary-light);
             color: var(--primary-color);
+            border-color: var(--primary-color);
         }
 
         .btn-tool.active {
@@ -622,23 +660,24 @@
             border-color: var(--primary-color);
         }
 
+        /* 대폭 확대된 캔버스 높이 (480px) */
         #mascot-canvas {
             display: block;
             width: 100%;
-            height: 380px;
+            height: 480px;
             touch-action: none;
             cursor: crosshair;
         }
 
         .form-textarea {
             width: 100%;
-            padding: 14px;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            font-size: 1rem;
-            margin-bottom: 22px;
+            padding: 16px;
+            border: 1.5px solid var(--border-color);
+            border-radius: 10px;
+            font-size: 1.05rem;
+            margin-bottom: 24px;
             outline: none;
-            height: 120px;
+            height: 130px;
             resize: vertical;
         }
 
@@ -647,10 +686,10 @@
             background-color: var(--primary-light);
             border: 1px solid #cce7d4;
             color: var(--primary-color);
-            padding: 14px;
-            border-radius: 8px;
-            margin-bottom: 24px;
-            font-size: 0.98rem;
+            padding: 16px;
+            border-radius: 10px;
+            margin-bottom: 28px;
+            font-size: 1.05rem;
             font-weight: 700;
             text-align: center;
         }
@@ -658,49 +697,50 @@
         /* 탭 3: 학급 제출함 */
         .filter-control-bar {
             background: white;
-            padding: 18px 22px;
-            border-radius: 10px;
+            padding: 20px 26px;
+            border-radius: 12px;
             border: 1px solid var(--border-color);
-            margin-bottom: 22px;
+            margin-bottom: 26px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 14px;
+            gap: 16px;
         }
 
         .filter-group {
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 16px;
         }
 
         .filter-group label {
-            font-size: 0.92rem;
+            font-size: 1rem;
             font-weight: 700;
             color: var(--text-dark);
         }
 
         .filter-select {
-            padding: 10px 36px 10px 16px;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            font-size: 0.95rem;
+            padding: 12px 40px 12px 18px;
+            border: 1.5px solid var(--border-color);
+            border-radius: 10px;
+            font-size: 1rem;
             outline: none;
             background-color: white;
             cursor: pointer;
+            font-weight: 600;
         }
 
         .board-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 22px;
+            grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+            gap: 26px;
         }
 
         .board-card {
             background: white;
-            border-radius: 12px;
-            padding: 20px;
+            border-radius: 14px;
+            padding: 22px;
             border: 1px solid var(--border-color);
             display: flex;
             flex-direction: column;
@@ -716,35 +756,35 @@
             display: inline-block;
             background-color: #f59e0b;
             color: white;
-            font-size: 0.78rem;
+            font-size: 0.8rem;
             font-weight: 700;
-            padding: 3px 10px;
-            border-radius: 4px;
-            margin-bottom: 10px;
+            padding: 4px 12px;
+            border-radius: 6px;
+            margin-bottom: 12px;
         }
 
         .card-author {
-            font-size: 0.95rem;
+            font-size: 1.02rem;
             font-weight: 700;
             color: var(--primary-color);
-            margin-bottom: 12px;
+            margin-bottom: 14px;
         }
 
         .card-mascot-img {
             width: 100%;
-            height: 220px;
+            height: 240px;
             object-fit: contain;
             background-color: #ffffff;
             border: 1px solid var(--border-color);
-            border-radius: 8px;
-            margin-bottom: 14px;
+            border-radius: 10px;
+            margin-bottom: 16px;
         }
 
         .card-desc {
-            font-size: 0.92rem;
+            font-size: 0.95rem;
             color: #475569;
-            line-height: 1.55;
-            margin-bottom: 18px;
+            line-height: 1.6;
+            margin-bottom: 20px;
             flex: 1;
             white-space: pre-line;
         }
@@ -753,22 +793,22 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding-top: 14px;
+            padding-top: 16px;
             border-top: 1px solid var(--border-color);
         }
 
         .btn-vote {
             background-color: #f1f5f9;
-            border: 1px solid #cbd5e1;
-            padding: 8px 16px;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            font-weight: 600;
+            border: 1.5px solid #cbd5e1;
+            padding: 10px 18px;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-weight: 700;
             color: var(--text-dark);
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
         }
 
         .btn-vote.voted {
@@ -784,43 +824,43 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(15, 23, 42, 0.6);
+            background-color: rgba(15, 23, 42, 0.65);
             display: none;
             justify-content: center;
             align-items: center;
             z-index: 1500;
-            backdrop-filter: blur(4px);
+            backdrop-filter: blur(5px);
         }
 
         .detail-modal-card {
             background: white;
             width: 90%;
-            max-width: 580px;
-            border-radius: 12px;
-            padding: 30px;
+            max-width: 600px;
+            border-radius: 16px;
+            padding: 34px;
             border: 1px solid var(--border-color);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15);
         }
 
         .detail-modal-card h4 {
-            font-size: 1.25rem;
+            font-size: 1.3rem;
             font-weight: 700;
             color: var(--primary-color);
-            margin-bottom: 16px;
+            margin-bottom: 18px;
         }
 
         .detail-modal-card p {
-            font-size: 1rem;
+            font-size: 1.05rem;
             color: #334155;
             line-height: 1.7;
-            margin-bottom: 24px;
+            margin-bottom: 28px;
             white-space: pre-line;
         }
 
         .detail-modal-footer {
             display: flex;
             justify-content: flex-end;
-            padding-top: 16px;
+            padding-top: 18px;
             border-top: 1px solid var(--border-color);
         }
 
@@ -828,30 +868,34 @@
             background: #cbd5e1;
             color: var(--text-dark);
             border: none;
-            padding: 10px 22px;
-            border-radius: 8px;
-            font-size: 0.95rem;
-            font-weight: 600;
+            padding: 12px 26px;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 700;
             cursor: pointer;
         }
 
         .toast-msg {
             display: none;
             position: fixed;
-            bottom: 30px;
-            right: 30px;
+            bottom: 36px;
+            right: 36px;
             background: #1e293b;
             color: white;
-            padding: 14px 24px;
-            border-radius: 8px;
-            font-size: 0.95rem;
+            padding: 16px 28px;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
             z-index: 2000;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.2);
         }
 
         @media screen and (max-width: 900px) {
             .ref-grid { grid-template-columns: 1fr; }
             .gwangju-symbol-grid { grid-template-columns: 1fr; }
+            main { padding: 0 20px; }
+            header { padding: 16px 20px; }
+            nav { padding: 10px 20px; }
         }
     </style>
 </head>
@@ -916,7 +960,7 @@
             </div>
             
             <div class="ref-grid">
-                <!-- 경기도 광주의 공식 상징물 (제목 깔끔한 줄바꿈 적용) -->
+                <!-- 경기도 광주의 공식 상징물 -->
                 <div class="ref-card">
                     <h4><i class="fa-solid fa-landmark" style="color:var(--primary-color);"></i> 경기도 광주의 공식 상징물</h4>
                     <div class="gwangju-symbol-grid">
@@ -960,7 +1004,7 @@
             <!-- 지식백과 검색 -->
             <div class="search-section-box">
                 <h4><i class="fa-solid fa-magnifying-glass"></i> 지식백과 직접 검색하기</h4>
-                <p style="font-size:0.92rem; color:var(--text-muted); margin-bottom:14px;">더 알고 싶은 광주시 키워드(예: 남한산성, 분원 도자기, 팔당호, 퇴촌 토마토 등)를 입력해보세요.</p>
+                <p style="font-size:0.95rem; color:var(--text-muted); margin-bottom:16px;">더 알고 싶은 광주시 키워드(예: 남한산성, 분원 도자기, 팔당호, 퇴촌 토마토 등)를 입력해보세요.</p>
                 <div class="search-bar">
                     <input type="text" id="search-keyword" placeholder="궁금한 키워드를 입력하세요..." onkeypress="if(event.key==='Enter') executeNaverSearch()">
                     <button onclick="executeNaverSearch()"><i class="fa-solid fa-magnifying-glass"></i> 검색</button>
@@ -1062,7 +1106,7 @@
             </div>
         </section>
 
-        <!-- 탭 2: 마스코트 제출하기 (그림판) -->
+        <!-- 탭 2: 마스코트 제출하기 (가로형 그림판) -->
         <section id="tab-submit" class="tab-content">
             <div class="submit-box">
                 <h3>내가 만드는 우리 지역 마스코트</h3>
@@ -1076,47 +1120,52 @@
                     
                     <div class="canvas-container">
                         <div class="canvas-toolbar">
-                            <div class="color-palette">
-                                <div class="color-btn active" style="background:#000000;" title="검정" onclick="setPenColor('#000000', this)"></div>
-                                <div class="color-btn" style="background:#64748b;" title="회색" onclick="setPenColor('#64748b', this)"></div>
-                                <div class="color-btn" style="background:#ef4444;" title="빨강" onclick="setPenColor('#ef4444', this)"></div>
-                                <div class="color-btn" style="background:#f97316;" title="주황" onclick="setPenColor('#f97316', this)"></div>
-                                <div class="color-btn" style="background:#eab308;" title="노랑" onclick="setPenColor('#eab308', this)"></div>
-                                <div class="color-btn" style="background:#84cc16;" title="연두" onclick="setPenColor('#84cc16', this)"></div>
-                                <div class="color-btn" style="background:#22c55e;" title="초록" onclick="setPenColor('#22c55e', this)"></div>
-                                <div class="color-btn" style="background:#06b6d4;" title="청록" onclick="setPenColor('#06b6d4', this)"></div>
-                                <div class="color-btn" style="background:#3b82f6;" title="파랑" onclick="setPenColor('#3b82f6', this)"></div>
-                                <div class="color-btn" style="background:#1e40af;" title="남색" onclick="setPenColor('#1e40af', this)"></div>
-                                <div class="color-btn" style="background:#a855f7;" title="보라" onclick="setPenColor('#a855f7', this)"></div>
-                                <div class="color-btn" style="background:#ec4899;" title="분홍" onclick="setPenColor('#ec4899', this)"></div>
-                                <div class="color-btn" style="background:#78350f;" title="갈색" onclick="setPenColor('#78350f', this)"></div>
-                                <div class="color-btn" style="background:#fde047;" title="살구" onclick="setPenColor('#fde047', this)"></div>
-                                <div class="color-btn" style="background:#ffffff;" title="흰색" onclick="setPenColor('#ffffff', this)"></div>
-                                
-                                <label class="custom-color-btn" id="custom-color-btn" title="직접 색상 선택">
-                                    <i class="fa-solid fa-eye-dropper"></i>
-                                    <input type="color" id="custom-color-picker" value="#000000" onchange="setCustomColor(this.value)">
-                                </label>
+                            <!-- 깔끔하고 정돈된 32px 원형 팔레트 -->
+                            <div class="color-palette-wrapper">
+                                <div class="color-palette">
+                                    <div class="color-btn active" style="background:#000000;" title="검정" onclick="setPenColor('#000000', this)"></div>
+                                    <div class="color-btn" style="background:#64748b;" title="회색" onclick="setPenColor('#64748b', this)"></div>
+                                    <div class="color-btn" style="background:#ef4444;" title="빨강" onclick="setPenColor('#ef4444', this)"></div>
+                                    <div class="color-btn" style="background:#f97316;" title="주황" onclick="setPenColor('#f97316', this)"></div>
+                                    <div class="color-btn" style="background:#eab308;" title="노랑" onclick="setPenColor('#eab308', this)"></div>
+                                    <div class="color-btn" style="background:#84cc16;" title="연두" onclick="setPenColor('#84cc16', this)"></div>
+                                    <div class="color-btn" style="background:#22c55e;" title="초록" onclick="setPenColor('#22c55e', this)"></div>
+                                    <div class="color-btn" style="background:#06b6d4;" title="청록" onclick="setPenColor('#06b6d4', this)"></div>
+                                    <div class="color-btn" style="background:#3b82f6;" title="파랑" onclick="setPenColor('#3b82f6', this)"></div>
+                                    <div class="color-btn" style="background:#1e40af;" title="남색" onclick="setPenColor('#1e40af', this)"></div>
+                                    <div class="color-btn" style="background:#a855f7;" title="보라" onclick="setPenColor('#a855f7', this)"></div>
+                                    <div class="color-btn" style="background:#ec4899;" title="분홍" onclick="setPenColor('#ec4899', this)"></div>
+                                    <div class="color-btn" style="background:#78350f;" title="갈색" onclick="setPenColor('#78350f', this)"></div>
+                                    <div class="color-btn" style="background:#fde047;" title="살구" onclick="setPenColor('#fde047', this)"></div>
+                                    <div class="color-btn" style="background:#ffffff;" title="흰색" onclick="setPenColor('#ffffff', this)"></div>
+                                    
+                                    <label class="custom-color-btn" id="custom-color-btn" title="직접 색상 선택">
+                                        <i class="fa-solid fa-eye-dropper"></i>
+                                        <input type="color" id="custom-color-picker" value="#000000" onchange="setCustomColor(this.value)">
+                                    </label>
+                                </div>
                             </div>
 
-                            <!-- 기본 펜 굵기를 3으로 변경 -->
+                            <!-- 펜 굵기 제어 -->
                             <div class="brush-control">
-                                <span>굵기:</span>
+                                <span>굵기</span>
                                 <input type="range" id="brush-size" min="1" max="28" value="3" onchange="updateBrushSize(this.value)">
                             </div>
 
-                            <div>
+                            <div class="toolbar-right-tools">
                                 <button type="button" class="btn-tool" id="eraser-btn" onclick="toggleEraser()"><i class="fa-solid fa-eraser"></i> 지우개</button>
                                 <button type="button" class="btn-tool" onclick="clearCanvas()"><i class="fa-solid fa-rotate-right"></i> 전체 지우기</button>
                             </div>
                         </div>
-                        <canvas id="mascot-canvas" width="700" height="400"></canvas>
+
+                        <!-- 시원하게 확장된 1000 x 550 고해상도 캔버스 영역 -->
+                        <canvas id="mascot-canvas" width="1000" height="550"></canvas>
                     </div>
 
                     <label class="form-label" for="mascot-desc"><i class="fa-solid fa-comment-dots"></i> 2. 마스코트에 담긴 의미와 설명</label>
                     <textarea id="mascot-desc" class="form-textarea" placeholder="예: 광주시의 남한산성과 개나리를 모티브로 한 친근한 수호신 마스코트입니다. 주황색 귀는 개나리 꽃잎을 상징합니다." required></textarea>
 
-                    <button type="submit" id="submit-btn" class="btn-primary" style="padding: 14px; font-size: 1.05rem;">마스코트 제출하기</button>
+                    <button type="submit" id="submit-btn" class="btn-primary">마스코트 제출하기</button>
                 </form>
             </div>
         </section>
@@ -1125,7 +1174,7 @@
         <section id="tab-board" class="tab-content">
             <div class="section-header" style="display: flex; justify-content: space-between; align-items: center;">
                 <h3>우리반 마스코트 제출함</h3>
-                <span style="font-size:0.88rem; color:var(--text-muted);">친구들이 그린 마스코트를 확인하고 마음에 드는 작품에 투표해보세요! 👍</span>
+                <span style="font-size:0.95rem; color:var(--text-muted);">친구들이 그린 마스코트를 확인하고 마음에 드는 작품에 투표해보세요! 👍</span>
             </div>
 
             <div class="filter-control-bar">
@@ -1136,7 +1185,7 @@
                         <option value="1">1반</option><option value="2">2반</option><option value="3">3반</option><option value="4">4반</option><option value="5">5반</option><option value="6">6반</option><option value="7">7반</option><option value="8">8반</option>
                     </select>
 
-                    <label for="filter-sort" style="margin-left: 10px;"><i class="fa-solid fa-arrow-down-wide-short"></i> 정렬:</label>
+                    <label for="filter-sort" style="margin-left: 12px;"><i class="fa-solid fa-arrow-down-wide-short"></i> 정렬:</label>
                     <select id="filter-sort" class="filter-select" onchange="renderSubmissions()">
                         <option value="newest">최신 제출순</option>
                         <option value="votes">득표 많은순</option>
@@ -1171,7 +1220,7 @@
         let canvas, ctx;
         let isDrawing = false;
         let currentPenColor = "#000000";
-        let currentPenSize = 3; // 초기 펜 굵기를 3으로 설정
+        let currentPenSize = 3;
         let isEraser = false;
 
         const resourceDict = {
@@ -1279,7 +1328,7 @@
             document.querySelectorAll('.color-btn').forEach(b => b.classList.remove('active'));
             if (btn) btn.classList.add('active');
             document.getElementById('custom-color-picker').value = color;
-            document.getElementById('custom-color-btn').style.borderColor = "#cbd5e1";
+            document.getElementById('custom-color-btn').style.boxShadow = "none";
         }
 
         function setCustomColor(color) {
@@ -1287,7 +1336,7 @@
             currentPenColor = color;
             document.getElementById('eraser-btn').classList.remove('active');
             document.querySelectorAll('.color-btn').forEach(b => b.classList.remove('active'));
-            document.getElementById('custom-color-btn').style.borderColor = color;
+            document.getElementById('custom-color-btn').style.boxShadow = `0 0 0 3px ${color}, 0 2px 6px rgba(0,0,0,0.2)`;
         }
 
         function updateBrushSize(val) { currentPenSize = val; }
@@ -1489,7 +1538,7 @@
                         <div class="card-desc">광주시의 남한산성과 개나리를 모티브로 한 수호신 마스코트 예시입니다.</div>
                     </div>
                     <div class="card-footer">
-                        <span style="font-size:0.78rem; color:#854d0e;">※ 예시 자료는 투표 불가</span>
+                        <span style="font-size:0.8rem; color:#854d0e;">※ 예시 자료는 투표 불가</span>
                         <button class="btn-vote" disabled><i class="fa-regular fa-thumbs-up"></i> 예시</button>
                     </div>
                 </div>
@@ -1508,7 +1557,7 @@
                                 <div class="card-desc">${sub.desc}</div>
                             </div>
                             <div class="card-footer">
-                                <span style="font-size:0.88rem; color:var(--text-muted);">받은 투표: <strong style="color:var(--primary-color); font-size:1.05rem;">${sub.votes || 0}</strong>표</span>
+                                <span style="font-size:0.92rem; color:var(--text-muted);">받은 투표: <strong style="color:var(--primary-color); font-size:1.1rem;">${sub.votes || 0}</strong>표</span>
                                 <button class="btn-vote ${hasVoted ? 'voted' : ''}" onclick="voteMascot('${sub.id}')">
                                     <i class="fa-solid fa-thumbs-up"></i> ${hasVoted ? '투표 완료' : '투표하기'}
                                 </button>
