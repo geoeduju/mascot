@@ -175,7 +175,7 @@
             text-decoration: underline;
         }
 
-        /* 네비게이션 바 (가로모드 터치에 최적화) */
+        /* 네비게이션 바 */
         nav {
             background: white;
             border-bottom: 1px solid var(--border-color);
@@ -220,7 +220,7 @@
             box-shadow: 0 4px 8px -1px rgba(43, 122, 75, 0.25);
         }
 
-        /* 메인 컨텐츠 (태블릿 가로화면 대응 확장 폭) */
+        /* 메인 컨텐츠 */
         main {
             flex: 1;
             max-width: 1360px;
@@ -274,7 +274,7 @@
             gap: 10px;
         }
 
-        /* 광주시 공식 상징물 카드 */
+        /* 광주시 공식 상징물 */
         .gwangju-symbol-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -432,7 +432,7 @@
             gap: 8px;
         }
 
-        /* 다른 지자체 마스코트 카드 그리드 */
+        /* 다른 지자체 마스코트 예시 카드 그리드 */
         .other-cities-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
@@ -485,7 +485,7 @@
             text-align: left;
         }
 
-        /* 탭 2: 마스코트 제출 (태블릿 가로형 그림판 박스) */
+        /* 탭 2: 마스코트 제출 (그림판 영역) */
         .submit-box {
             background: white;
             padding: 36px 40px;
@@ -521,7 +521,6 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.04);
         }
 
-        /* 그림판 상단 툴바 UI 정돈 */
         .canvas-toolbar {
             background: #f8fafc;
             padding: 14px 20px;
@@ -533,7 +532,6 @@
             border-bottom: 1.5px solid var(--border-color);
         }
 
-        /* 깔끔하게 개선된 색상 팔레트 디자인 */
         .color-palette-wrapper {
             display: flex;
             align-items: center;
@@ -551,7 +549,6 @@
             flex-wrap: wrap;
         }
 
-        /* 터치하기 편한 32px 원형 색상 버튼 */
         .color-btn {
             width: 32px;
             height: 32px;
@@ -573,7 +570,6 @@
             z-index: 2;
         }
 
-        /* 세련된 무지개 원형 스포이트 버튼 */
         .custom-color-btn {
             position: relative;
             width: 32px;
@@ -660,7 +656,6 @@
             border-color: var(--primary-color);
         }
 
-        /* 대폭 확대된 캔버스 높이 (480px) */
         #mascot-canvas {
             display: block;
             width: 100%;
@@ -697,7 +692,7 @@
         /* 탭 3: 학급 제출함 */
         .filter-control-bar {
             background: white;
-            padding: 20px 26px;
+            padding: 18px 24px;
             border-radius: 12px;
             border: 1px solid var(--border-color);
             margin-bottom: 26px;
@@ -733,18 +728,26 @@
 
         .board-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
-            gap: 26px;
+            grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+            gap: 18px;
         }
 
         .board-card {
             background: white;
-            border-radius: 14px;
-            padding: 22px;
+            border-radius: 12px;
+            padding: 14px;
             border: 1px solid var(--border-color);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+        }
+
+        .board-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+            border-color: var(--primary-color);
         }
 
         .board-card.example-card {
@@ -756,59 +759,66 @@
             display: inline-block;
             background-color: #f59e0b;
             color: white;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 700;
-            padding: 4px 12px;
-            border-radius: 6px;
-            margin-bottom: 12px;
+            padding: 3px 8px;
+            border-radius: 4px;
+            margin-bottom: 8px;
         }
 
         .card-author {
-            font-size: 1.02rem;
+            font-size: 0.92rem;
             font-weight: 700;
             color: var(--primary-color);
-            margin-bottom: 14px;
+            margin-bottom: 8px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .card-mascot-img {
             width: 100%;
-            height: 240px;
+            height: 140px;
             object-fit: contain;
             background-color: #ffffff;
             border: 1px solid var(--border-color);
-            border-radius: 10px;
-            margin-bottom: 16px;
+            border-radius: 8px;
+            margin-bottom: 10px;
         }
 
         .card-desc {
-            font-size: 0.95rem;
+            font-size: 0.85rem;
             color: #475569;
-            line-height: 1.6;
-            margin-bottom: 20px;
+            line-height: 1.45;
+            margin-bottom: 12px;
             flex: 1;
-            white-space: pre-line;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .card-footer {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding-top: 16px;
+            padding-top: 10px;
             border-top: 1px solid var(--border-color);
         }
 
         .btn-vote {
             background-color: #f1f5f9;
-            border: 1.5px solid #cbd5e1;
-            padding: 10px 18px;
-            border-radius: 10px;
-            font-size: 0.95rem;
+            border: 1px solid #cbd5e1;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.82rem;
             font-weight: 700;
             color: var(--text-dark);
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 4px;
         }
 
         .btn-vote.voted {
@@ -817,7 +827,7 @@
             border-color: var(--primary-color);
         }
 
-        /* 상세 모달 */
+        /* 상세 확대보기 모달 */
         #detail-modal {
             position: fixed;
             top: 0;
@@ -835,32 +845,32 @@
         .detail-modal-card {
             background: white;
             width: 90%;
-            max-width: 600px;
+            max-width: 620px;
             border-radius: 16px;
-            padding: 34px;
+            padding: 30px;
             border: 1px solid var(--border-color);
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15);
         }
 
         .detail-modal-card h4 {
-            font-size: 1.3rem;
+            font-size: 1.25rem;
             font-weight: 700;
             color: var(--primary-color);
-            margin-bottom: 18px;
+            margin-bottom: 16px;
         }
 
         .detail-modal-card p {
-            font-size: 1.05rem;
+            font-size: 1rem;
             color: #334155;
-            line-height: 1.7;
-            margin-bottom: 28px;
+            line-height: 1.65;
+            margin-bottom: 24px;
             white-space: pre-line;
         }
 
         .detail-modal-footer {
             display: flex;
             justify-content: flex-end;
-            padding-top: 18px;
+            padding-top: 16px;
             border-top: 1px solid var(--border-color);
         }
 
@@ -868,9 +878,9 @@
             background: #cbd5e1;
             color: var(--text-dark);
             border: none;
-            padding: 12px 26px;
-            border-radius: 10px;
-            font-size: 1rem;
+            padding: 10px 24px;
+            border-radius: 8px;
+            font-size: 0.98rem;
             font-weight: 700;
             cursor: pointer;
         }
@@ -1106,7 +1116,7 @@
             </div>
         </section>
 
-        <!-- 탭 2: 마스코트 제출하기 (가로형 그림판) -->
+        <!-- 탭 2: 마스코트 제출하기 -->
         <section id="tab-submit" class="tab-content">
             <div class="submit-box">
                 <h3>내가 만드는 우리 지역 마스코트</h3>
@@ -1120,7 +1130,6 @@
                     
                     <div class="canvas-container">
                         <div class="canvas-toolbar">
-                            <!-- 깔끔하고 정돈된 32px 원형 팔레트 -->
                             <div class="color-palette-wrapper">
                                 <div class="color-palette">
                                     <div class="color-btn active" style="background:#000000;" title="검정" onclick="setPenColor('#000000', this)"></div>
@@ -1146,7 +1155,6 @@
                                 </div>
                             </div>
 
-                            <!-- 펜 굵기 제어 -->
                             <div class="brush-control">
                                 <span>굵기</span>
                                 <input type="range" id="brush-size" min="1" max="28" value="3" onchange="updateBrushSize(this.value)">
@@ -1157,8 +1165,6 @@
                                 <button type="button" class="btn-tool" onclick="clearCanvas()"><i class="fa-solid fa-rotate-right"></i> 전체 지우기</button>
                             </div>
                         </div>
-
-                        <!-- 시원하게 확장된 1000 x 550 고해상도 캔버스 영역 -->
                         <canvas id="mascot-canvas" width="1000" height="550"></canvas>
                     </div>
 
@@ -1174,9 +1180,10 @@
         <section id="tab-board" class="tab-content">
             <div class="section-header" style="display: flex; justify-content: space-between; align-items: center;">
                 <h3>우리반 마스코트 제출함</h3>
-                <span style="font-size:0.95rem; color:var(--text-muted);">친구들이 그린 마스코트를 확인하고 마음에 드는 작품에 투표해보세요! 👍</span>
+                <span style="font-size:0.92rem; color:var(--text-muted);">작품을 터치하면 크게 볼 수 있어요! 마음에 드는 작품에 투표해 보세요 👍</span>
             </div>
 
+            <!-- 새로고침 버튼이 탑재된 필터 바 -->
             <div class="filter-control-bar">
                 <div class="filter-group">
                     <label for="filter-class"><i class="fa-solid fa-filter"></i> 학급 선택:</label>
@@ -1191,6 +1198,11 @@
                         <option value="votes">득표 많은순</option>
                     </select>
                 </div>
+
+                <!-- 실시간 새로고침 버튼 -->
+                <button type="button" class="btn-tool" onclick="manualRefreshBoard()" style="background: var(--primary-light); color: var(--primary-color); border-color: var(--primary-color);">
+                    <i id="refresh-icon" class="fa-solid fa-rotate-right"></i> 새로고침
+                </button>
             </div>
 
             <div class="board-grid" id="board-grid">
@@ -1203,6 +1215,7 @@
     <div id="detail-modal">
         <div class="detail-modal-card">
             <h4 id="modal-title">상세 정보</h4>
+            <img id="modal-img" src="" alt="마스코트 크게보기" style="display: none; width: 100%; max-height: 380px; object-fit: contain; background:#ffffff; border: 1px solid var(--border-color); border-radius: 10px; margin-bottom: 18px;">
             <p id="modal-content">내용이 표시됩니다.</p>
             <div class="detail-modal-footer">
                 <button class="btn-modal-close" onclick="closeDetailModal()">닫기</button>
@@ -1395,6 +1408,16 @@
             } catch (err) { console.error("데이터 수신 오류:", err); }
         }
 
+        /* 수동 새로고침 함수 */
+        async function manualRefreshBoard() {
+            const icon = document.getElementById('refresh-icon');
+            if (icon) icon.classList.add('fa-spin');
+            showToast("최신 데이터를 가져오는 중...");
+            await loadSheetsData();
+            if (icon) icon.classList.remove('fa-spin');
+            showToast("제출함이 새로고침 되었습니다! 🔄");
+        }
+
         function handleLogin(e) {
             e.preventDefault();
             const classVal = document.getElementById('student-class').value;
@@ -1428,16 +1451,45 @@
             if (tabName === 'board') loadSheetsData();
         }
 
+        function openMascotModal(id) {
+            const imgElem = document.getElementById('modal-img');
+            const titleElem = document.getElementById('modal-title');
+            const contentElem = document.getElementById('modal-content');
+            const modal = document.getElementById('detail-modal');
+
+            if (id === 'example') {
+                titleElem.textContent = "선생님 예시 마스코트 (그리니 & 크리니)";
+                imgElem.src = "images/mascot_gwangju.png";
+                imgElem.style.display = "block";
+                contentElem.textContent = "경기도 광주시의 공식 마스코트 '그리니'와 '크리니'입니다.\n그리니는 숲의 요정, 크리니는 물의 요정을 상징합니다.";
+                modal.style.display = 'flex';
+                return;
+            }
+
+            const sub = fetchedSubmissions.find(item => item.id === id);
+            if (!sub) return;
+
+            titleElem.textContent = `${sub.author} 학생의 마스코트`;
+            imgElem.src = sub.imageData;
+            imgElem.style.display = "block";
+            contentElem.textContent = sub.desc + `\n\n👍 현재 받은 투표: ${sub.votes || 0}표`;
+            modal.style.display = 'flex';
+        }
+
         function showResourceDetail(key) {
             const res = resourceDict[key];
             if (res) {
+                document.getElementById('modal-img').style.display = 'none';
                 document.getElementById('modal-title').textContent = res.title;
                 document.getElementById('modal-content').textContent = res.content;
                 document.getElementById('detail-modal').style.display = 'flex';
             }
         }
 
-        function closeDetailModal() { document.getElementById('detail-modal').style.display = 'none'; }
+        function closeDetailModal() {
+            document.getElementById('detail-modal').style.display = 'none';
+            document.getElementById('modal-img').style.display = 'none';
+        }
 
         function executeNaverSearch() {
             const query = document.getElementById('search-keyword').value.trim();
@@ -1530,16 +1582,16 @@
             else list.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
 
             let html = `
-                <div class="board-card example-card">
+                <div class="board-card example-card" onclick="openMascotModal('example')">
                     <div>
                         <span class="card-badge-example">[교사 예시 자료]</span>
                         <div class="card-author"><i class="fa-solid fa-chalkboard-user"></i> 선생님 예시 마스코트</div>
                         <img src="images/mascot_gwangju.png" alt="선생님 예시 그림" class="card-mascot-img" onerror="this.src='https://via.placeholder.com/300x200?text=선생님+예시+마스코트'">
-                        <div class="card-desc">광주시의 남한산성과 개나리를 모티브로 한 수호신 마스코트 예시입니다.</div>
+                        <div class="card-desc">광주시의 공식 마스코트 '그리니'와 '크리니' 예시입니다. (터치시 크게보기)</div>
                     </div>
                     <div class="card-footer">
-                        <span style="font-size:0.8rem; color:#854d0e;">※ 예시 자료는 투표 불가</span>
-                        <button class="btn-vote" disabled><i class="fa-regular fa-thumbs-up"></i> 예시</button>
+                        <span style="font-size:0.75rem; color:#854d0e;">🔍 터치시 크게보기</span>
+                        <button class="btn-vote" disabled onclick="event.stopPropagation()"><i class="fa-regular fa-thumbs-up"></i> 예시</button>
                     </div>
                 </div>
             `;
@@ -1550,16 +1602,16 @@
                 list.forEach(sub => {
                     const hasVoted = votedCardIds.includes(sub.id);
                     html += `
-                        <div class="board-card">
+                        <div class="board-card" onclick="openMascotModal('${sub.id}')">
                             <div>
                                 <div class="card-author"><i class="fa-solid fa-user-pen"></i> ${sub.author}</div>
                                 <img src="${sub.imageData}" alt="${sub.author}의 마스코트" class="card-mascot-img">
                                 <div class="card-desc">${sub.desc}</div>
                             </div>
                             <div class="card-footer">
-                                <span style="font-size:0.92rem; color:var(--text-muted);">받은 투표: <strong style="color:var(--primary-color); font-size:1.1rem;">${sub.votes || 0}</strong>표</span>
-                                <button class="btn-vote ${hasVoted ? 'voted' : ''}" onclick="voteMascot('${sub.id}')">
-                                    <i class="fa-solid fa-thumbs-up"></i> ${hasVoted ? '투표 완료' : '투표하기'}
+                                <span style="font-size:0.82rem; color:var(--text-muted);">투표: <strong style="color:var(--primary-color); font-size:0.95rem;">${sub.votes || 0}</strong>표</span>
+                                <button class="btn-vote ${hasVoted ? 'voted' : ''}" onclick="event.stopPropagation(); voteMascot('${sub.id}')">
+                                    <i class="fa-solid fa-thumbs-up"></i> ${hasVoted ? '완료' : '투표'}
                                 </button>
                             </div>
                         </div>
