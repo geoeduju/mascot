@@ -1226,7 +1226,7 @@
     </div>
 
     <script>
-        // 📌 새로 제공받은 Google Apps Script Web App URL 적용
+        // 📌 최신 배포 Google Apps Script Web App URL
         const GAS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbw_s7MmD4cmQzOBTEUZQ823ACGV9vkFzJTgBeTAAR35Y0u-POO84Q3BHWihLo1YE3Z4/exec";
 
         let currentUser = { classNum: "", studentNum: "", name: "" };
@@ -1551,7 +1551,6 @@
             switchTab('board');
         }
 
-        // 📌 투표자 정보(voter) 추가하여 백엔드로 전송
         async function voteMascot(id) {
             if (!currentUser.name || !currentUser.classNum || !currentUser.studentNum) {
                 showToast("투표를 하려면 먼저 학생 정보를 입력해주세요.");
