@@ -7,6 +7,15 @@
     <!-- Noto Sans KR & FontAwesome Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        // 이미지 파일이 없을 때 보여줄 회색 대체 그림
+        function imgFallback(img) {
+            img.onerror = null;
+            img.src = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(
+                '<svg xmlns="http://www.w3.org/2000/svg" width="300" height="200"><rect width="100%" height="100%" fill="#f1f5f9"/>' +
+                '<text x="50%" y="50%" fill="#94a3b8" font-size="16" text-anchor="middle" dominant-baseline="middle">이미지 준비 중</text></svg>');
+        }
+    </script>
     
     <style>
         :root {
@@ -37,6 +46,11 @@
             line-height: 1.6;
             -webkit-user-select: none;
             user-select: none;
+        }
+
+        input, textarea, select {
+            -webkit-user-select: text;
+            user-select: text;
         }
 
         /* 학생 로그인 모달 */
@@ -100,8 +114,10 @@
             color: var(--text-dark);
         }
 
-        .form-group input {
+        .form-group input,
+        .form-group select {
             width: 100%;
+            background: #ffffff;
             padding: 14px 16px;
             border: 1.5px solid var(--border-color);
             border-radius: 10px;
@@ -655,9 +671,15 @@
         #mascot-canvas {
             display: block;
             width: 100%;
-            height: 480px;
+            height: auto;
+            aspect-ratio: 1000 / 550; /* 캔버스 실제 크기와 같은 비율 */
             touch-action: none;
             cursor: crosshair;
+        }
+
+        .btn-tool:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
         }
 
         .form-textarea {
@@ -825,6 +847,11 @@
             gap: 4px;
         }
 
+        .btn-vote:disabled {
+            cursor: default;
+            opacity: 0.6;
+        }
+
         .btn-vote.voted {
             background-color: var(--primary-color);
             color: white;
@@ -925,18 +952,22 @@
             <form id="login-form" onsubmit="handleLogin(event)">
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="student-class"><i class="fa-solid fa-graduation-cap"></i> 반 (숫자)</label>
-                        <input type="number" id="student-class" min="1" max="20" placeholder="예: 3" required>
+                        <label for="student-class"><i class="fa-solid fa-graduation-cap"></i> 반</label>
+                        <select id="student-class" required>
+                            <option value="" disabled selected>반 선택</option>
+                        </select>
                     </div>
                     <div class="form-group">
-                        <label for="student-number"><i class="fa-solid fa-list-ol"></i> 번호 (숫자)</label>
-                        <input type="number" id="student-number" min="1" max="50" placeholder="예: 15" required>
+                        <label for="student-number"><i class="fa-solid fa-list-ol"></i> 번호</label>
+                        <select id="student-number" required>
+                            <option value="" disabled selected>번호 선택</option>
+                        </select>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="student-name"><i class="fa-solid fa-user"></i> 이름</label>
-                    <input type="text" id="student-name" placeholder="성함을 입력하세요" required>
+                    <input type="text" id="student-name" placeholder="이름을 입력하세요" maxlength="20" required>
                 </div>
 
                 <button type="submit" class="btn-primary">활동 시작하기</button>
@@ -978,12 +1009,12 @@
                     <h4><i class="fa-solid fa-landmark" style="color:var(--primary-color);"></i> 경기도 광주시의 공식 상징물</h4>
                     <div class="gwangju-symbol-grid">
                         <div class="gwangju-symbol-item">
-                            <img src="images/mascot_gwangju.png" alt="광주시 마스코트 그리니 크리니" class="gwangju-symbol-img" onerror="this.src='https://via.placeholder.com/200x140?text=그리니+크리니'">
+                            <img src="images/mascot_gwangju.png" alt="광주시 마스코트 그리니 크리니" class="gwangju-symbol-img" onerror="imgFallback(this)">
                             <h5>공식 마스코트<br>(그리니 & 크리니)</h5>
                             <p>• <strong>그리니 (숲의 요정):</strong> 초록빛 숲과 깨끗한 공기를 만드는 친근한 요정 캐릭터입니다.<br>• <strong>크리니 (물의 요정):</strong> 팔당호와 경안천의 맑은 물을 보호하는 요정 캐릭터입니다.</p>
                         </div>
                         <div class="gwangju-symbol-item">
-                            <img src="images/gwangju_ci.png" alt="광주시 도시 심볼" class="gwangju-symbol-img" onerror="this.src='https://via.placeholder.com/200x140?text=도시+심볼'">
+                            <img src="images/gwangju_ci.png" alt="광주시 도시 심볼" class="gwangju-symbol-img" onerror="imgFallback(this)">
                             <h5>도시 심볼<br>(CI)</h5>
                             <p>• <strong>붉은색:</strong> 남한산성 성곽과 미래를 향한 열정<br>• <strong>노란색&파란색:</strong> 펼친 팔 형상, 도심 발전 및 청렴한 시정<br>• <strong>초록색:</strong> 도약하는 다리와 풍요로운 대지</p>
                         </div>
@@ -1035,84 +1066,84 @@
             </div>
             <div class="other-cities-grid">
                 <div class="city-card">
-                    <img src="images/mascot_yongin.png" alt="용인시 조아용" class="city-img" onerror="this.src='https://via.placeholder.com/200x150?text=조아용'">
+                    <img src="images/mascot_yongin.png" alt="용인시 조아용" class="city-img" onerror="imgFallback(this)">
                     <div class="city-name">용인특례시</div>
                     <div class="city-mascot-title">조아용</div>
                     <div class="city-meaning">용인시의 지명에서 착안한 친근한 용 캐릭터로 시민들에게 큰 사랑을 받는 마스코트.</div>
                 </div>
 
                 <div class="city-card">
-                    <img src="images/mascot_seoul.png" alt="서울특별시 해치" class="city-img" onerror="this.src='https://via.placeholder.com/200x150?text=해치'">
+                    <img src="images/mascot_seoul.png" alt="서울특별시 해치" class="city-img" onerror="imgFallback(this)">
                     <div class="city-name">서울특별시</div>
                     <div class="city-mascot-title">해치</div>
                     <div class="city-meaning">선악을 구별하고 재앙을 물리치는 상상의 동물 해태를 모티브로 한 서울의 수호 마스코트.</div>
                 </div>
 
                 <div class="city-card">
-                    <img src="images/mascot_goyang.png" alt="고양시 고양고양이" class="city-img" onerror="this.src='https://via.placeholder.com/200x150?text=고양고양이'">
+                    <img src="images/mascot_goyang.png" alt="고양시 고양고양이" class="city-img" onerror="imgFallback(this)">
                     <div class="city-name">고양특례시</div>
                     <div class="city-mascot-title">고양고양이</div>
                     <div class="city-meaning">'고양'시의 이름에서 착안하여 재치 있고 귀여운 고양이 형상으로 만든 대표 마스코트.</div>
                 </div>
 
                 <div class="city-card">
-                    <img src="images/mascot_suwon.png" alt="수원시 수원이" class="city-img" onerror="this.src='https://via.placeholder.com/200x150?text=수원이'">
+                    <img src="images/mascot_suwon.png" alt="수원시 수원이" class="city-img" onerror="imgFallback(this)">
                     <div class="city-name">수원특례시</div>
                     <div class="city-mascot-title">수원이</div>
                     <div class="city-meaning">수원시에서 최초로 발견된 고유종인 '수원청개구리'를 친근하게 캐릭터화한 마스코트.</div>
                 </div>
 
                 <div class="city-card">
-                    <img src="images/mascot_busan.png" alt="부산광역시 부기" class="city-img" onerror="this.src='https://via.placeholder.com/200x150?text=부기'">
+                    <img src="images/mascot_busan.png" alt="부산광역시 부기" class="city-img" onerror="imgFallback(this)">
                     <div class="city-name">부산광역시</div>
                     <div class="city-mascot-title">부기</div>
                     <div class="city-meaning">부산의 시조인 갈매기를 의인화하여 소통과 해양도시 부산을 홍보하는 마스코트.</div>
                 </div>
 
                 <div class="city-card">
-                    <img src="images/mascot_gangwon.png" alt="강원특별자치도 강원이와 특별이" class="city-img" onerror="this.src='https://via.placeholder.com/200x150?text=강원이와특별이'">
+                    <img src="images/mascot_gangwon.png" alt="강원특별자치도 강원이와 특별이" class="city-img" onerror="imgFallback(this)">
                     <div class="city-name">강원특별자치도</div>
                     <div class="city-mascot-title">강원이와 특별이</div>
                     <div class="city-meaning">강원특별자치시대를 맞아 강원도의 상징 동물이자 청정 자연을 대변하는 반달가슴곰과 호랑이 마스코트.</div>
                 </div>
 
                 <div class="city-card">
-                    <img src="images/mascot_daejeon.png" alt="대전광역시 꿈돌이" class="city-img" onerror="this.src='https://via.placeholder.com/200x150?text=꿈돌이'">
+                    <img src="images/mascot_daejeon.png" alt="대전광역시 꿈돌이" class="city-img" onerror="imgFallback(this)">
                     <div class="city-name">대전광역시</div>
                     <div class="city-mascot-title">꿈돌이</div>
                     <div class="city-meaning">과학기술도시 대전을 상징하는 우주인 캐릭터로 오랜 시간 대전의 영원한 친구로 자리잡은 마스코트.</div>
                 </div>
 
                 <div class="city-card">
-                    <img src="images/mascot_sejong.png" alt="세종특별자치시 젊은세종 충녕" class="city-img" onerror="this.src='https://via.placeholder.com/200x150?text=충녕'">
+                    <img src="images/mascot_sejong.png" alt="세종특별자치시 젊은세종 충녕" class="city-img" onerror="imgFallback(this)">
                     <div class="city-name">세종특별자치시</div>
                     <div class="city-mascot-title">젊은세종 충녕</div>
                     <div class="city-meaning">세종대왕의 이름인 '충녕'에서 이름을 딴 젊고 활기찬 한글 문화도시 세종의 마스코트.</div>
                 </div>
 
                 <div class="city-card">
-                    <img src="images/mascot_incheon.png" alt="인천광역시 버기 애기 등대리 꼬미" class="city-img" onerror="this.src='https://via.placeholder.com/200x150?text=인천프렌즈'">
+                    <img src="images/mascot_incheon.png" alt="인천광역시 버기 애기 등대리 꼬미" class="city-img" onerror="imgFallback(this)">
                     <div class="city-name">인천광역시</div>
                     <div class="city-mascot-title">버기, 애기, 등대리, 꼬미</div>
                     <div class="city-meaning">인천의 대표 동물인 점박이물범과 팔미도 등대를 모티브로 탄생한 친근한 마스코트 친구들.</div>
                 </div>
 
                 <div class="city-card">
-                    <img src="images/mascot_jinju.png" alt="진주시 하모" class="city-img" onerror="this.src='https://via.placeholder.com/200x150?text=하모'">
+                    <img src="images/mascot_jinju.png" alt="진주시 하모" class="city-img" onerror="imgFallback(this)">
                     <div class="city-name">경상남도 진주시</div>
                     <div class="city-mascot-title">하모</div>
                     <div class="city-meaning">진주 남강과 진양호에 서식하는 수달을 모티브로 한 캐릭터. 긍정의 메시지("하모! 다 잘 될 거야")를 전달하는 진주시의 대표 마스코트.</div>
                 </div>
 
                 <div class="city-card">
-                    <img src="images/mascot_ulsan.png" alt="울산광역시 해울이" class="city-img" onerror="this.src='https://via.placeholder.com/200x150?text=해울이'">
+                    <img src="images/mascot_ulsan.png" alt="울산광역시 해울이" class="city-img" onerror="imgFallback(this)">
                     <div class="city-name">울산광역시</div>
                     <div class="city-mascot-title">해울이</div>
                     <div class="city-meaning">동해의 푸른 바다를 힘차게 뛰어오르는 고래를 친근하게 형상화한 울산의 대표 마스코트.</div>
                 </div>
 
                 <div class="city-card">
-                    <img src="images/mascot_chungnam.png" alt="충청남도 충청이와 충나미" class="city-img" onerror="this.src='https://via.placeholder.com/200x150?text=충청이와충나미'">
+                    <img src="images/mascot_chungnam.png" alt="충청남도 충청이와 충나미" class="city-img" onerror="imgFallback(this)">
                     <div class="city-name">충청남도</div>
                     <div class="city-mascot-title">충청이와 충나미</div>
                     <div class="city-meaning">충청남도의 푸른 백제 문화와 자연환경을 상징하며 따뜻하고 친근한 도민들의 마음을 담은 마스코트.</div>
@@ -1161,19 +1192,20 @@
 
                             <div class="brush-control">
                                 <span>굵기</span>
-                                <input type="range" id="brush-size" min="1" max="28" value="3" onchange="updateBrushSize(this.value)">
+                                <input type="range" id="brush-size" min="1" max="28" value="3" oninput="updateBrushSize(this.value)">
                             </div>
 
                             <div class="toolbar-right-tools">
+                                <button type="button" class="btn-tool" id="undo-btn" onclick="undoCanvas()" disabled><i class="fa-solid fa-rotate-left"></i> 되돌리기</button>
                                 <button type="button" class="btn-tool" id="eraser-btn" onclick="toggleEraser()"><i class="fa-solid fa-eraser"></i> 지우개</button>
-                                <button type="button" class="btn-tool" onclick="clearCanvas()"><i class="fa-solid fa-rotate-right"></i> 전체 지우기</button>
+                                <button type="button" class="btn-tool" onclick="clearCanvas()"><i class="fa-solid fa-trash-can"></i> 전체 지우기</button>
                             </div>
                         </div>
                         <canvas id="mascot-canvas" width="1000" height="550"></canvas>
                     </div>
 
                     <label class="form-label" for="mascot-desc"><i class="fa-solid fa-comment-dots"></i> 2. 마스코트에 담긴 의미와 설명</label>
-                    <textarea id="mascot-desc" class="form-textarea" placeholder="예: 광주시의 남한산성과 개나리를 모티브로 한 친근한 수호신 마스코트입니다. 주황색 귀는 개나리 꽃잎을 상징합니다." required></textarea>
+                    <textarea id="mascot-desc" class="form-textarea" maxlength="500" placeholder="예: 광주시의 남한산성과 개나리를 모티브로 한 친근한 수호신 마스코트입니다. 주황색 귀는 개나리 꽃잎을 상징합니다." required></textarea>
 
                     <button type="submit" id="submit-btn" class="btn-primary">마스코트 제출하기</button>
                 </form>
@@ -1184,16 +1216,13 @@
         <section id="tab-board" class="tab-content">
             <div class="section-header" style="display: flex; justify-content: space-between; align-items: center;">
                 <h3>우리반 마스코트 제출함</h3>
-                <span style="font-size:0.92rem; color:var(--text-muted);">작품을 터치하면 크게 볼 수 있어요! 마음에 드는 작품에 투표해 보세요 (1인당 최대 3표) 👍</span>
+                <span style="font-size:0.92rem; color:var(--text-muted);">작품을 터치하면 크게 볼 수 있어요! 우리 반 작품 중 마음에 드는 작품에 투표해 보세요 (1인당 최대 3표) 👍 <strong id="my-vote-count"></strong></span>
             </div>
 
             <div class="filter-control-bar">
                 <div class="filter-group">
                     <label for="filter-class"><i class="fa-solid fa-filter"></i> 학급 선택:</label>
-                    <select id="filter-class" class="filter-select" onchange="renderSubmissions()">
-                        <option value="all">전체 반 보기</option>
-                        <option value="1">1반</option><option value="2">2반</option><option value="3">3반</option><option value="4">4반</option><option value="5">5반</option><option value="6">6반</option><option value="7">7반</option><option value="8">8반</option><option value="9">9반</option><option value="10">10반</option><option value="11">11반</option><option value="12">12반</option><option value="13">13반</option>
-                    </select>
+                    <select id="filter-class" class="filter-select" onchange="loadSheetsData(true)"></select>
 
                     <label for="filter-sort" style="margin-left: 12px;"><i class="fa-solid fa-arrow-down-wide-short"></i> 정렬:</label>
                     <select id="filter-sort" class="filter-select" onchange="renderSubmissions()">
@@ -1229,16 +1258,27 @@
         // 📌 최신 배포 Google Apps Script Web App URL
         const GAS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbw_s7MmD4cmQzOBTEUZQ823ACGV9vkFzJTgBeTAAR35Y0u-POO84Q3BHWihLo1YE3Z4/exec";
 
+        const CLASS_COUNT = 13;
+        const STUDENT_COUNT = 32;
+        const MAX_VOTES = 3;
+        const MAX_IMAGE_LENGTH = 48000; // 시트 셀 한도(50,000자)보다 조금 작게
+        const MAX_UNDO = 10;
+
         let currentUser = { classNum: "", studentNum: "", name: "" };
         let fetchedSubmissions = [];
-        let votedCardIds = JSON.parse(localStorage.getItem('voted_mascots_list') || '[]');
+        let renderedList = [];      // 화면에 그려진 순서대로의 작품 목록 (카드 번호로 찾기)
+        let mySubmitted = false;
+        let myVotedIds = [];        // 서버 기록 기준, 내가 투표한 우리 반 작품
+        let isVoting = false;
+        let loadRequestId = 0;
 
         let canvas, ctx;
         let isDrawing = false;
+        let hasDrawn = false;
+        let undoStack = [];
         let currentPenColor = "#000000";
         let currentPenSize = 3;
         let isEraser = false;
-
         const resourceDict = {
             "남한산성": { title: "유네스코 세계문화유산 - 남한산성", content: "남한산성은 통일신라시대부터 조선시대까지 한양을 지키던 호국 성곽입니다. 2014년 유네스코 세계문화유산으로 등재되었습니다." },
             "분원도자요지": { title: "조선 왕실 분원 도자기 요지", content: "조선시대 왕실에 올리던 최고급 백자를 만들어내던 사옹원 분원이 광주 분원리에 위치해 있습니다." },
@@ -1252,27 +1292,44 @@
             "백제주": { title: "남한산성 백제주", content: "남한산성 자락의 깨끗한 물과 전통 곡식으로 빚어낸 광주시의 대표 민속 전통주입니다." }
         };
 
-        window.onload = function() { 
+        window.onload = function() {
+            initSelects();
             initCanvas();
-            loadSheetsData(); 
         };
 
+        // 학생이 쓴 글을 화면에 넣을 때 HTML로 실행되지 않도록 바꿔준다
+        function esc(value) {
+            return String(value ?? '').replace(/[&<>"']/g, c =>
+                ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+        }
+
+        function initSelects() {
+            const classSelect = document.getElementById('student-class');
+            const numberSelect = document.getElementById('student-number');
+            const filterSelect = document.getElementById('filter-class');
+            for (let i = 1; i <= CLASS_COUNT; i++) {
+                classSelect.add(new Option(`${i}반`, String(i)));
+                filterSelect.add(new Option(`${i}반`, String(i)));
+            }
+            for (let i = 1; i <= STUDENT_COUNT; i++) {
+                numberSelect.add(new Option(`${i}번`, String(i)));
+            }
+        }
+
+        /* ---------------- 그림판 ---------------- */
         function initCanvas() {
             canvas = document.getElementById('mascot-canvas');
             if (!canvas) return;
             ctx = canvas.getContext('2d');
-            
+
             ctx.fillStyle = "#ffffff";
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            canvas.addEventListener('mousedown', startDrawing);
-            canvas.addEventListener('mousemove', draw);
-            canvas.addEventListener('mouseup', stopDrawing);
-            canvas.addEventListener('mouseleave', stopDrawing);
-
-            canvas.addEventListener('touchstart', startDrawingTouch, { passive: false });
-            canvas.addEventListener('touchmove', drawTouch, { passive: false });
-            canvas.addEventListener('touchend', stopDrawing);
+            // 마우스·손가락·S펜을 한 번에 처리
+            canvas.addEventListener('pointerdown', startDrawing);
+            canvas.addEventListener('pointermove', draw);
+            canvas.addEventListener('pointerup', stopDrawing);
+            canvas.addEventListener('pointercancel', stopDrawing);
         }
 
         function getPos(e) {
@@ -1283,49 +1340,32 @@
             };
         }
 
-        function getTouchPos(e) {
-            const rect = canvas.getBoundingClientRect();
-            const touch = e.touches[0];
-            return {
-                x: (touch.clientX - rect.left) * (canvas.width / rect.width),
-                y: (touch.clientY - rect.top) * (canvas.height / rect.height)
-            };
+        function applyPenStyle() {
+            ctx.strokeStyle = isEraser ? "#ffffff" : currentPenColor;
+            ctx.lineWidth = currentPenSize;
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
         }
 
         function startDrawing(e) {
+            if (!e.isPrimary || e.button > 0) return; // 두 번째 손가락, 오른쪽 클릭 무시
+            e.preventDefault();
+            canvas.setPointerCapture(e.pointerId);
+            pushUndo();
             isDrawing = true;
+            hasDrawn = true;
             const pos = getPos(e);
+            applyPenStyle();
             ctx.beginPath();
             ctx.moveTo(pos.x, pos.y);
-        }
-
-        function draw(e) {
-            if (!isDrawing) return;
-            const pos = getPos(e);
-            ctx.strokeStyle = isEraser ? "#ffffff" : currentPenColor;
-            ctx.lineWidth = currentPenSize;
-            ctx.lineCap = 'round';
-            ctx.lineJoin = 'round';
-            ctx.lineTo(pos.x, pos.y);
+            ctx.lineTo(pos.x + 0.01, pos.y); // 톡 찍기만 해도 점이 찍히도록
             ctx.stroke();
         }
 
-        function startDrawingTouch(e) {
+        function draw(e) {
+            if (!isDrawing || !e.isPrimary) return;
             e.preventDefault();
-            isDrawing = true;
-            const pos = getTouchPos(e);
-            ctx.beginPath();
-            ctx.moveTo(pos.x, pos.y);
-        }
-
-        function drawTouch(e) {
-            if (!isDrawing) return;
-            e.preventDefault();
-            const pos = getTouchPos(e);
-            ctx.strokeStyle = isEraser ? "#ffffff" : currentPenColor;
-            ctx.lineWidth = currentPenSize;
-            ctx.lineCap = 'round';
-            ctx.lineJoin = 'round';
+            const pos = getPos(e);
             ctx.lineTo(pos.x, pos.y);
             ctx.stroke();
         }
@@ -1335,6 +1375,18 @@
                 ctx.closePath();
                 isDrawing = false;
             }
+        }
+
+        function pushUndo() {
+            undoStack.push(ctx.getImageData(0, 0, canvas.width, canvas.height));
+            if (undoStack.length > MAX_UNDO) undoStack.shift();
+            document.getElementById('undo-btn').disabled = false;
+        }
+
+        function undoCanvas() {
+            if (undoStack.length === 0) return;
+            ctx.putImageData(undoStack.pop(), 0, 0);
+            document.getElementById('undo-btn').disabled = undoStack.length === 0;
         }
 
         function setPenColor(color, btn) {
@@ -1355,71 +1407,99 @@
             document.getElementById('custom-color-btn').style.boxShadow = `0 0 0 3px ${color}, 0 2px 6px rgba(0,0,0,0.2)`;
         }
 
-        function updateBrushSize(val) { currentPenSize = val; }
+        function updateBrushSize(val) { currentPenSize = Number(val); }
 
         function toggleEraser() {
             isEraser = !isEraser;
-            const btn = document.getElementById('eraser-btn');
-            if (isEraser) btn.classList.add('active');
-            else btn.classList.remove('active');
+            document.getElementById('eraser-btn').classList.toggle('active', isEraser);
         }
 
         function clearCanvas() {
+            pushUndo(); // 실수로 눌러도 [되돌리기]로 복구 가능
             ctx.fillStyle = "#ffffff";
             ctx.fillRect(0, 0, canvas.width, canvas.height);
         }
 
+        // 시트 셀 한도에 맞도록 JPEG로 압축 (필요하면 크기도 줄임)
+        function exportCompressedImage() {
+            const tmp = document.createElement('canvas');
+            const tctx = tmp.getContext('2d');
+            for (const scale of [1, 0.8, 0.65, 0.5]) {
+                tmp.width = Math.round(canvas.width * scale);
+                tmp.height = Math.round(canvas.height * scale);
+                tctx.fillStyle = "#ffffff";
+                tctx.fillRect(0, 0, tmp.width, tmp.height);
+                tctx.drawImage(canvas, 0, 0, tmp.width, tmp.height);
+                for (const quality of [0.8, 0.65, 0.5, 0.4]) {
+                    const dataUrl = tmp.toDataURL('image/jpeg', quality);
+                    if (dataUrl.length <= MAX_IMAGE_LENGTH) return dataUrl;
+                }
+            }
+            return null;
+        }
+
+        /* ---------------- 데이터 불러오기 ---------------- */
         function checkSubmissionStatus() {
-            if (!currentUser.classNum || !currentUser.studentNum) return;
-
-            const isAlreadySubmitted = fetchedSubmissions.some(sub => 
-                String(sub.classNum) === String(currentUser.classNum) && 
-                String(sub.studentNum) === String(currentUser.studentNum)
-            );
-
             const descInput = document.getElementById('mascot-desc');
             const submitBtn = document.getElementById('submit-btn');
             const noticeBox = document.getElementById('submitted-notice');
 
-            if (isAlreadySubmitted) {
-                descInput.disabled = true;
-                submitBtn.disabled = true;
-                submitBtn.textContent = "✅ 마스코트 제출 완료 (1회 제출 완료)";
-                submitBtn.style.backgroundColor = "#64748b";
-                submitBtn.style.cursor = "not-allowed";
-                noticeBox.style.display = 'block';
-            } else {
-                descInput.disabled = false;
-                submitBtn.disabled = false;
-                submitBtn.textContent = "마스코트 제출하기";
-                submitBtn.style.backgroundColor = "var(--primary-color)";
-                submitBtn.style.cursor = "pointer";
-                noticeBox.style.display = 'none';
-            }
+            descInput.disabled = mySubmitted;
+            submitBtn.disabled = mySubmitted;
+            submitBtn.textContent = mySubmitted ? "✅ 마스코트 제출 완료 (1회 제출 완료)" : "마스코트 제출하기";
+            submitBtn.style.backgroundColor = mySubmitted ? "#64748b" : "var(--primary-color)";
+            submitBtn.style.cursor = mySubmitted ? "not-allowed" : "pointer";
+            noticeBox.style.display = mySubmitted ? 'block' : 'none';
         }
 
-        async function loadSheetsData() {
-            if (!GAS_WEB_APP_URL) return;
+        async function loadSheetsData(showLoading = false) {
+            if (!currentUser.classNum) return false;
+            const classNum = document.getElementById('filter-class').value || currentUser.classNum;
+            const requestId = ++loadRequestId;
+
+            if (showLoading) {
+                document.getElementById('board-grid').innerHTML =
+                    `<div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: var(--text-muted);"><i class="fa-solid fa-spinner fa-spin"></i> ${esc(classNum)}반 작품을 불러오는 중...</div>`;
+            }
+
+            const params = new URLSearchParams({
+                action: 'read',
+                classNum: classNum,
+                meClass: currentUser.classNum,
+                meNum: currentUser.studentNum,
+                _t: Date.now()
+            });
+
             try {
-                const response = await fetch(GAS_WEB_APP_URL + "?action=read");
+                const response = await fetch(`${GAS_WEB_APP_URL}?${params}`);
                 const data = await response.json();
-                if (Array.isArray(data)) {
-                    fetchedSubmissions = data;
-                    renderSubmissions();
-                    checkSubmissionStatus();
+                if (requestId !== loadRequestId) return false; // 더 최근 요청이 있으면 무시
+                if (data.status !== 'ok') throw new Error(data.message || 'read failed');
+                fetchedSubmissions = data.items;
+                mySubmitted = data.mySubmitted;
+                myVotedIds = data.myVotedIds;
+                renderSubmissions();
+                checkSubmissionStatus();
+                return true;
+            } catch (err) {
+                console.error("데이터 수신 오류:", err);
+                if (requestId === loadRequestId) {
+                    showToast("제출함을 불러오지 못했습니다. 와이파이를 확인하고 [새로고침]을 눌러주세요.");
+                    if (showLoading) renderSubmissions();
                 }
-            } catch (err) { console.error("데이터 수신 오류:", err); }
+                return false;
+            }
         }
 
         async function manualRefreshBoard() {
             const icon = document.getElementById('refresh-icon');
             if (icon) icon.classList.add('fa-spin');
-            showToast("최신 데이터를 가져오는 중...");
-            await loadSheetsData();
+            const ok = await loadSheetsData();
             if (icon) icon.classList.remove('fa-spin');
-            showToast("제출함이 새로고침 되었습니다! 🔄");
+            if (ok) showToast("제출함이 새로고침 되었습니다! 🔄");
         }
 
+        /* ---------------- 로그인 · 화면 전환 ---------------- */
         function handleLogin(e) {
             e.preventDefault();
             const classVal = document.getElementById('student-class').value;
@@ -1429,37 +1509,35 @@
             if (!classVal || !numVal || !nameVal) return;
 
             currentUser = { classNum: classVal, studentNum: numVal, name: nameVal };
+            mySubmitted = false;
+            myVotedIds = [];
             document.getElementById('display-user-info').textContent = `${currentUser.classNum}반 ${currentUser.studentNum}번 ${currentUser.name}`;
             document.getElementById('login-overlay').style.display = 'none';
 
             document.getElementById('filter-class').value = currentUser.classNum;
-            renderSubmissions();
             checkSubmissionStatus();
+            loadSheetsData(true);
         }
 
         function reopenLogin() { document.getElementById('login-overlay').style.display = 'flex'; }
 
         function switchTab(tabName) {
-            document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+            const tabNames = ['reference', 'submit', 'board'];
+            document.querySelectorAll('.nav-tab').forEach((t, i) => t.classList.toggle('active', tabNames[i] === tabName));
             document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-
             document.querySelector(`#tab-${tabName}`).classList.add('active');
-            
-            const tabButtons = document.querySelectorAll('.nav-tab');
-            if (tabName === 'reference') tabButtons[0].classList.add('active');
-            else if (tabName === 'submit') tabButtons[1].classList.add('active');
-            else if (tabName === 'board') tabButtons[2].classList.add('active');
 
             if (tabName === 'board') loadSheetsData();
         }
 
-        function openMascotModal(id) {
+        /* ---------------- 상세 보기 ---------------- */
+        function openMascotModal(idx) {
             const imgElem = document.getElementById('modal-img');
             const titleElem = document.getElementById('modal-title');
             const contentElem = document.getElementById('modal-content');
             const modal = document.getElementById('detail-modal');
 
-            if (id === 'example') {
+            if (idx === 'example') {
                 titleElem.textContent = "선생님 예시 마스코트 (그리니 & 크리니)";
                 imgElem.src = "images/mascot_gwangju.png";
                 imgElem.style.display = "block";
@@ -1468,13 +1546,13 @@
                 return;
             }
 
-            const sub = fetchedSubmissions.find(item => item.id === id);
+            const sub = renderedList[idx];
             if (!sub) return;
 
             titleElem.textContent = `${sub.author} 학생의 마스코트`;
             imgElem.src = sub.imageData;
             imgElem.style.display = "block";
-            contentElem.textContent = sub.desc + `\n\n👍 현재 받은 투표: ${sub.votes || 0}표`;
+            contentElem.textContent = (sub.desc || '') + `\n\n👍 현재 받은 투표: ${sub.votes || 0}표`;
             modal.style.display = 'flex';
         }
 
@@ -1503,120 +1581,124 @@
             banner.style.display = 'flex';
         }
 
+        /* ---------------- 제출 · 투표 ---------------- */
         async function submitMascot(e) {
             e.preventDefault();
             if (!currentUser.name) { reopenLogin(); return; }
+            if (mySubmitted) return;
 
             const descText = document.getElementById('mascot-desc').value.trim();
+            if (!hasDrawn) return alert("마스코트 그림을 먼저 그려주세요! 🎨");
+            if (!descText) return alert("마스코트에 담긴 의미와 설명을 적어주세요.");
+
+            const imageData = exportCompressedImage();
+            if (!imageData) return alert("그림이 너무 복잡해서 저장할 수 없어요. 일부를 단순하게 다시 그려주세요.");
+
             const submitBtn = document.getElementById('submit-btn');
-
-            const imageData = canvas.toDataURL('image/png');
-
             submitBtn.disabled = true;
             submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> 마스코트 전송 중...`;
             submitBtn.style.backgroundColor = "var(--accent-color)";
 
-            const payload = {
-                action: "add",
-                id: "mascot_" + Date.now(),
-                classNum: currentUser.classNum,
-                studentNum: currentUser.studentNum,
-                name: currentUser.name,
-                author: `${currentUser.classNum}반 ${currentUser.studentNum}번 ${currentUser.name}`,
-                imageData: imageData,
-                desc: descText,
-                votes: 0,
-                timestamp: Date.now()
-            };
+            try {
+                const response = await fetch(GAS_WEB_APP_URL, {
+                    method: "POST",
+                    headers: { 'Content-Type': 'text/plain' },
+                    body: JSON.stringify({
+                        action: "add",
+                        classNum: currentUser.classNum,
+                        studentNum: currentUser.studentNum,
+                        name: currentUser.name,
+                        imageData: imageData,
+                        desc: descText
+                    })
+                });
+                const data = await response.json();
 
-            if (GAS_WEB_APP_URL) {
-                try {
-                    await fetch(GAS_WEB_APP_URL, { method: "POST", body: JSON.stringify(payload) });
-                    await loadSheetsData();
-                } catch (err) { 
-                    console.error("전송 실패:", err); 
-                    alert("전송 중 오류가 발생했습니다. 다시 시도해주세요.");
-                    submitBtn.disabled = false;
-                    submitBtn.textContent = "마스코트 제출하기";
-                    submitBtn.style.backgroundColor = "var(--primary-color)";
-                    return;
+                if (data.status === 'ok') {
+                    mySubmitted = true;
+                    showToast("마스코트 제출이 완료되었습니다! 🎨");
+                    document.getElementById('filter-class').value = currentUser.classNum;
+                    switchTab('board');
+                } else if (data.status === 'duplicate') {
+                    mySubmitted = true;
+                    alert("이 반/번호로 이미 제출된 마스코트가 있습니다. (1인당 1회 제출)\n반/번호를 잘못 선택했다면 선생님께 말씀해 주세요.");
+                } else if (data.status === 'tooLarge') {
+                    alert("그림 용량이 너무 커서 저장할 수 없어요. 일부를 단순하게 다시 그려주세요.");
+                } else {
+                    alert("제출하지 못했습니다: " + (data.message || "알 수 없는 오류"));
                 }
-            } else {
-                fetchedSubmissions.unshift(payload);
-                renderSubmissions();
+            } catch (err) {
+                console.error("전송 실패:", err);
+                alert("인터넷 연결 문제로 제출하지 못했습니다.\n와이파이를 확인하고 다시 [제출하기]를 눌러주세요. (그림은 그대로 남아 있어요)");
+            } finally {
+                checkSubmissionStatus();
             }
-
-            checkSubmissionStatus();
-            showToast("마스코트 제출이 완료되었습니다! 🎨");
-            switchTab('board');
         }
 
-        async function voteMascot(id) {
+        async function voteMascot(idx) {
             if (!currentUser.name || !currentUser.classNum || !currentUser.studentNum) {
                 showToast("투표를 하려면 먼저 학생 정보를 입력해주세요.");
                 reopenLogin();
                 return;
             }
+            const target = renderedList[idx];
+            if (!target || isVoting) return;
 
-            const target = fetchedSubmissions.find(s => s.id === id);
-            if (target && String(target.classNum) === String(currentUser.classNum) && String(target.studentNum) === String(currentUser.studentNum)) {
-                showToast("자신의 작품에는 투표할 수 없습니다. 😊");
-                return;
+            if (String(target.classNum) !== String(currentUser.classNum)) return showToast("우리 반 작품에만 투표할 수 있어요.");
+            if (String(target.studentNum) === String(currentUser.studentNum)) return showToast("자신의 작품에는 투표할 수 없습니다. 😊");
+            if (myVotedIds.includes(target.id)) return showToast("이미 투표한 작품입니다.");
+            if (myVotedIds.length >= MAX_VOTES) return showToast(`투표는 1인당 최대 ${MAX_VOTES}개 작품까지만 가능합니다! (${MAX_VOTES}/${MAX_VOTES})`);
+
+            isVoting = true;
+            showToast("투표 저장 중...");
+            try {
+                const response = await fetch(GAS_WEB_APP_URL, {
+                    method: "POST",
+                    headers: { 'Content-Type': 'text/plain' },
+                    body: JSON.stringify({
+                        action: "vote",
+                        id: target.id,
+                        classNum: currentUser.classNum,
+                        studentNum: currentUser.studentNum,
+                        name: currentUser.name
+                    })
+                });
+                const data = await response.json();
+                await loadSheetsData();
+
+                const messages = {
+                    ok: `투표가 완료되었습니다! 👍 (${data.myCount}/${MAX_VOTES})`,
+                    already: "이미 투표한 작품입니다.",
+                    limit: `투표는 1인당 최대 ${MAX_VOTES}개 작품까지만 가능합니다! (${MAX_VOTES}/${MAX_VOTES})`,
+                    ownWork: "자신의 작품에는 투표할 수 없습니다. 😊",
+                    otherClass: "우리 반 작품에만 투표할 수 있어요."
+                };
+                showToast(messages[data.status] || ("투표하지 못했습니다: " + (data.message || "알 수 없는 오류")));
+            } catch (err) {
+                console.error("투표 오류:", err);
+                showToast("인터넷 연결 문제로 투표하지 못했습니다. 다시 시도해 주세요.");
+            } finally {
+                isVoting = false;
             }
-
-            if (votedCardIds.includes(id)) {
-                showToast("이미 투표한 작품입니다.");
-                return;
-            }
-
-            if (votedCardIds.length >= 3) {
-                showToast("투표는 1인당 최대 3개 작품까지만 가능합니다! (3/3)");
-                return;
-            }
-
-            votedCardIds.push(id);
-            localStorage.setItem('voted_mascots_list', JSON.stringify(votedCardIds));
-
-            const voterInfo = `${currentUser.classNum}반 ${currentUser.studentNum}번 ${currentUser.name}`;
-
-            if (GAS_WEB_APP_URL) {
-                showToast("투표 저장 중...");
-                try {
-                    await fetch(GAS_WEB_APP_URL, { 
-                        method: "POST", 
-                        body: JSON.stringify({ 
-                            action: "vote", 
-                            id: id,
-                            voter: voterInfo
-                        }) 
-                    });
-                    await loadSheetsData();
-                } catch (err) { console.error("투표 오류:", err); }
-            } else {
-                if (target) target.votes = (target.votes || 0) + 1;
-                renderSubmissions();
-            }
-
-            showToast(`투표가 완료되었습니다! 👍 (${votedCardIds.length}/3)`);
         }
 
         function renderSubmissions() {
             const grid = document.getElementById('board-grid');
-            const classFilter = document.getElementById('filter-class').value;
             const sortFilter = document.getElementById('filter-sort').value;
 
-            let list = [...fetchedSubmissions];
-
-            if (classFilter !== 'all') list = list.filter(item => String(item.classNum) === String(classFilter));
+            const list = [...fetchedSubmissions];
             if (sortFilter === 'votes') list.sort((a, b) => (b.votes || 0) - (a.votes || 0));
-            else list.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
+            else list.sort((a, b) => (Number(b.timestamp) || 0) - (Number(a.timestamp) || 0));
+            renderedList = list;
+
+            document.getElementById('my-vote-count').textContent = currentUser.classNum ? `(내 투표 ${myVotedIds.length}/${MAX_VOTES})` : '';
 
             let html = `
                 <div class="board-card example-card" onclick="openMascotModal('example')">
                     <div>
                         <span class="card-badge-example">[교사 예시 자료]</span>
                         <div class="card-author"><i class="fa-solid fa-chalkboard-user"></i> 선생님 예시 마스코트</div>
-                        <img src="images/mascot_gwangju.png" alt="선생님 예시 그림" class="card-mascot-img" onerror="this.src='https://via.placeholder.com/300x200?text=선생님+예시+마스코트'">
+                        <img src="images/mascot_gwangju.png" alt="선생님 예시 그림" class="card-mascot-img" onerror="imgFallback(this)">
                         <div class="card-desc">광주시의 공식 마스코트 '그리니'와 '크리니' 예시입니다.</div>
                     </div>
                     <div class="card-footer">
@@ -1629,20 +1711,27 @@
             if (list.length === 0) {
                 html += `<div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: var(--text-muted);">제출된 마스코트가 없습니다.</div>`;
             } else {
-                list.forEach(sub => {
-                    const hasVoted = votedCardIds.includes(sub.id);
+                list.forEach((sub, idx) => {
+                    const isMyClass = String(sub.classNum) === String(currentUser.classNum);
+                    const isMine = isMyClass && String(sub.studentNum) === String(currentUser.studentNum);
+                    const hasVoted = myVotedIds.includes(sub.id);
+
+                    let voteButton;
+                    if (!isMyClass) voteButton = `<button class="btn-vote" disabled onclick="event.stopPropagation()">다른 반</button>`;
+                    else if (isMine) voteButton = `<button class="btn-vote" disabled onclick="event.stopPropagation()"><i class="fa-solid fa-user"></i> 내 작품</button>`;
+                    else if (hasVoted) voteButton = `<button class="btn-vote voted" disabled onclick="event.stopPropagation()"><i class="fa-solid fa-thumbs-up"></i> 완료</button>`;
+                    else voteButton = `<button class="btn-vote" onclick="event.stopPropagation(); voteMascot(${idx})"><i class="fa-solid fa-thumbs-up"></i> 투표</button>`;
+
                     html += `
-                        <div class="board-card" onclick="openMascotModal('${sub.id}')">
+                        <div class="board-card" onclick="openMascotModal(${idx})">
                             <div>
-                                <div class="card-author"><i class="fa-solid fa-user-pen"></i> ${sub.author}</div>
-                                <img src="${sub.imageData}" alt="${sub.author}의 마스코트" class="card-mascot-img">
-                                <div class="card-desc">${sub.desc}</div>
+                                <div class="card-author"><i class="fa-solid fa-user-pen"></i> ${esc(sub.author)}</div>
+                                <img src="${esc(sub.imageData)}" alt="${esc(sub.author)}의 마스코트" class="card-mascot-img" onerror="imgFallback(this)">
+                                <div class="card-desc">${esc(sub.desc)}</div>
                             </div>
                             <div class="card-footer">
-                                <span style="font-size:0.82rem; color:var(--text-muted);">투표: <strong style="color:var(--primary-color); font-size:0.95rem;">${sub.votes || 0}</strong>표</span>
-                                <button class="btn-vote ${hasVoted ? 'voted' : ''}" onclick="event.stopPropagation(); voteMascot('${sub.id}')">
-                                    <i class="fa-solid fa-thumbs-up"></i> ${hasVoted ? '완료' : '투표'}
-                                </button>
+                                <span style="font-size:0.82rem; color:var(--text-muted);">투표: <strong style="color:var(--primary-color); font-size:0.95rem;">${Number(sub.votes) || 0}</strong>표</span>
+                                ${voteButton}
                             </div>
                         </div>
                     `;
@@ -1652,11 +1741,13 @@
             grid.innerHTML = html;
         }
 
+        let toastTimer = null;
         function showToast(msg) {
             const toast = document.getElementById('toast');
             toast.textContent = msg;
             toast.style.display = 'block';
-            setTimeout(() => { toast.style.display = 'none'; }, 2500);
+            clearTimeout(toastTimer);
+            toastTimer = setTimeout(() => { toast.style.display = 'none'; }, 2500);
         }
     </script>
 </body>
