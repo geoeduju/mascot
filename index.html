@@ -1190,7 +1190,7 @@
         <section id="tab-board" class="tab-content">
             <div class="section-header" style="display: flex; justify-content: space-between; align-items: center;">
                 <h3>우리반 마스코트 제출함</h3>
-                <span style="font-size:0.92rem; color:var(--text-muted);">작품을 터치하면 크게 볼 수 있어요! 마음에 드는 작품에 투표해 보세요 👍</span>
+                <span style="font-size:0.92rem; color:var(--text-muted);">작품을 터치하면 크게 볼 수 있어요! 마음에 드는 작품에 투표해 보세요 (1인당 최대 3표) 👍</span>
             </div>
 
             <div class="filter-control-bar">
@@ -1558,8 +1558,33 @@
             switchTab('board');
         }
 
+        /* 변경된 투표 로직 */
         async function voteMascot(id) {
-            if (votedCardIds.includes(id)) { showToast("이미 투표한 작품입니다."); return; }
+            // 1. 학생 정보 입력 확인
+            if (!currentUser.name || !currentUser.classNum || !currentUser.studentNum) {
+                showToast("투표를 하려면 먼저 학생 정보를 입력해주세요.");
+                reopenLogin();
+                return;
+            }
+
+            // 2. 본인 작품 투표 차단
+            const target = fetchedSubmissions.find(s => s.id === id);
+            if (target && String(target.classNum) === String(currentUser.classNum) && String(target.studentNum) === String(currentUser.studentNum)) {
+                showToast("자신의 작품에는 투표할 수 없습니다. 😊");
+                return;
+            }
+
+            // 3. 중복 투표 차단
+            if (votedCardIds.includes(id)) {
+                showToast("이미 투표한 작품입니다.");
+                return;
+            }
+
+            // 4. 최대 3개 작품 투표 제한
+            if (votedCardIds.length >= 3) {
+                showToast("투표는 1인당 최대 3개 작품까지만 가능합니다! (3/3)");
+                return;
+            }
 
             votedCardIds.push(id);
             localStorage.setItem('voted_mascots_list', JSON.stringify(votedCardIds));
@@ -1571,12 +1596,11 @@
                     await loadSheetsData();
                 } catch (err) { console.error("투표 오류:", err); }
             } else {
-                const target = fetchedSubmissions.find(s => s.id === id);
                 if (target) target.votes = (target.votes || 0) + 1;
                 renderSubmissions();
             }
 
-            showToast("투표가 완료되었습니다! 👍");
+            showToast(`투표가 완료되었습니다! 👍 (${votedCardIds.length}/3)`);
         }
 
         function renderSubmissions() {
