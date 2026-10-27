@@ -274,7 +274,6 @@
             gap: 10px;
         }
 
-        /* 광주시 공식 상징물 */
         .gwangju-symbol-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -353,7 +352,6 @@
             transform: translateY(-2px);
         }
 
-        /* 지식백과 검색 영역 */
         .search-section-box {
             background: white;
             padding: 28px;
@@ -432,7 +430,6 @@
             gap: 8px;
         }
 
-        /* 다른 지자체 마스코트 예시 카드 그리드 */
         .other-cities-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
@@ -485,7 +482,6 @@
             text-align: left;
         }
 
-        /* 탭 2: 마스코트 제출 (그림판 영역) */
         .submit-box {
             background: white;
             padding: 36px 40px;
@@ -689,7 +685,6 @@
             text-align: center;
         }
 
-        /* 탭 3: 학급 제출함 */
         .filter-control-bar {
             background: white;
             padding: 18px 24px;
@@ -836,7 +831,6 @@
             border-color: var(--primary-color);
         }
 
-        /* 상세 확대보기 모달 */
         #detail-modal {
             position: fixed;
             top: 0;
@@ -1198,7 +1192,7 @@
                     <label for="filter-class"><i class="fa-solid fa-filter"></i> 학급 선택:</label>
                     <select id="filter-class" class="filter-select" onchange="renderSubmissions()">
                         <option value="all">전체 반 보기</option>
-                        <option value="1">1반</option><option value="2">2반</option><option value="3">3반</option><option value="4">4반</option><option value="5">5반</option><option value="6">6반</option><option value="7">7반</option><option value="8">8반</option>
+                        <option value="1">1반</option><option value="2">2반</option><option value="3">3반</option><option value="4">4반</option><option value="5">5반</option><option value="6">6반</option><option value="7">7반</option><option value="8">8반</option><option value="9">9반</option><option value="10">10반</option><option value="11">11반</option><option value="12">12반</option><option value="13">13반</option>
                     </select>
 
                     <label for="filter-sort" style="margin-left: 12px;"><i class="fa-solid fa-arrow-down-wide-short"></i> 정렬:</label>
@@ -1208,7 +1202,6 @@
                     </select>
                 </div>
 
-                <!-- 실시간 새로고침 버튼 -->
                 <button type="button" class="btn-tool" onclick="manualRefreshBoard()" style="background: var(--primary-light); color: var(--primary-color); border-color: var(--primary-color);">
                     <i id="refresh-icon" class="fa-solid fa-rotate-right"></i> 새로고침
                 </button>
@@ -1233,7 +1226,8 @@
     </div>
 
     <script>
-        const GAS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbww2rAQook33qarQ44ycraWV3ZGRChN7oVh1EnrElTeZJYNrTr5FcQjJjQ8u4RU7piC/exec";
+        // 📌 새로 제공받은 Google Apps Script Web App URL 적용
+        const GAS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbw_s7MmD4cmQzOBTEUZQ823ACGV9vkFzJTgBeTAAR35Y0u-POO84Q3BHWihLo1YE3Z4/exec";
 
         let currentUser = { classNum: "", studentNum: "", name: "" };
         let fetchedSubmissions = [];
@@ -1417,7 +1411,6 @@
             } catch (err) { console.error("데이터 수신 오류:", err); }
         }
 
-        /* 수동 새로고침 함수 */
         async function manualRefreshBoard() {
             const icon = document.getElementById('refresh-icon');
             if (icon) icon.classList.add('fa-spin');
@@ -1558,29 +1551,25 @@
             switchTab('board');
         }
 
-        /* 변경된 투표 로직 */
+        // 📌 투표자 정보(voter) 추가하여 백엔드로 전송
         async function voteMascot(id) {
-            // 1. 학생 정보 입력 확인
             if (!currentUser.name || !currentUser.classNum || !currentUser.studentNum) {
                 showToast("투표를 하려면 먼저 학생 정보를 입력해주세요.");
                 reopenLogin();
                 return;
             }
 
-            // 2. 본인 작품 투표 차단
             const target = fetchedSubmissions.find(s => s.id === id);
             if (target && String(target.classNum) === String(currentUser.classNum) && String(target.studentNum) === String(currentUser.studentNum)) {
                 showToast("자신의 작품에는 투표할 수 없습니다. 😊");
                 return;
             }
 
-            // 3. 중복 투표 차단
             if (votedCardIds.includes(id)) {
                 showToast("이미 투표한 작품입니다.");
                 return;
             }
 
-            // 4. 최대 3개 작품 투표 제한
             if (votedCardIds.length >= 3) {
                 showToast("투표는 1인당 최대 3개 작품까지만 가능합니다! (3/3)");
                 return;
@@ -1589,10 +1578,19 @@
             votedCardIds.push(id);
             localStorage.setItem('voted_mascots_list', JSON.stringify(votedCardIds));
 
+            const voterInfo = `${currentUser.classNum}반 ${currentUser.studentNum}번 ${currentUser.name}`;
+
             if (GAS_WEB_APP_URL) {
                 showToast("투표 저장 중...");
                 try {
-                    await fetch(GAS_WEB_APP_URL, { method: "POST", body: JSON.stringify({ action: "vote", id: id }) });
+                    await fetch(GAS_WEB_APP_URL, { 
+                        method: "POST", 
+                        body: JSON.stringify({ 
+                            action: "vote", 
+                            id: id,
+                            voter: voterInfo
+                        }) 
+                    });
                     await loadSheetsData();
                 } catch (err) { console.error("투표 오류:", err); }
             } else {
